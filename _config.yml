@@ -1,0 +1,5 @@
+# Permalinks
+permalink:        /:title.html
+
+# Server
+exclude:          [.gitignore,README.md]
