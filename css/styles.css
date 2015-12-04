@@ -1,0 +1,13 @@
+body {
+	background-color: #EAE6D1;
+}
+
+header {
+	background-color: #458BE1;
+	color: #FFFFFF;
+	margin-bottom: 35px;
+}
+
+header .jumbotron {
+	background-color: transparent;
+}
