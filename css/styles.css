@@ -12,9 +12,11 @@ header {
 @media (min-width:768px) {
 	header h1 {
 		font-size: 63px;
+		text-shadow: 4px 3px 3px rgba(0, 0, 0, 0.35);
 	}
 
 	header p {
 		font-size: 21px;
+		text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.35);
 	}
 }
