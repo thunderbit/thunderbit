@@ -6,9 +6,15 @@ header {
 	background-color: #458BE1;
 	color: #FFFFFF;
 	margin-bottom: 35px;
-	padding: 15px;
+	padding: 35px;
 }
 
-header .jumbotron {
-	background-color: transparent;
+@media (min-width:768px) {
+	header h1 {
+		font-size: 63px;
+	}
+
+	header p {
+		font-size: 21px;
+	}
 }
