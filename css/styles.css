@@ -2,19 +2,23 @@ body {
 	background-color: #F2EFE5;
 }
 
-header {
+body > header {
 	background-color: #458BE1;
 	color: #FFFFFF;
 	margin-bottom: 35px;
 	padding: 35px;
 }
 
+header {
+	margin-bottom: 35px;
+}
+
 @media (min-width:768px) {
-	header h1 {
+	body > header h1 {
 		font-size: 63px;
 	}
 
-	header p {
+	body > header p {
 		font-size: 21px;
 	}
 }

@@ -17,22 +17,47 @@ layout: basic
 <section>
 	<div class="container">
 		<div class="row text-center">
+			<header>
+				<h2>Principales características</h2>
+			</header><!-- /header -->
 			<div class="col-md-4">
 				<i class="fa fa-tags fa-5x"></i>
-				<h2>Etiquetas</h2>
+				<h3>Etiquetas</h3>
 				<p class="lead">Thunderbit organiza los recursos digitales mediante etiquetas, un método conocido y ampliamente utilizado</p>
 			</div>
 			<div class="col-md-4">
 				<i class="fa fa-linux fa-5x"></i> <i class="fa fa-windows fa-5x"></i> <i class="fa fa-apple fa-5x"></i>
-				<h2>Multiplataforma</h2>
+				<h3>Multiplataforma</h3>
 				<p class="lead">Thunderbit puede ser ejecutado en distintas plataformas, como GNU/Linux, Windows y Mac</p>
 			</div>
 			<div class="col-md-4">
 				<i class="fa fa-unlock fa-5x"></i>
-				<h2>Software Libre</h2>
+				<h3>Software Libre</h3>
 				<p class="lead">El código fuente de Thunderbit es distribuido bajo la licencia libre <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License</a></p>
 			</div>
 		</div>
+	</div>
+</section>
+<section class="posts-container">
+	<div class="container">
+		<div class="row">
+			<header id="header" class="text-center">
+				<h2>Blog</h2>
+			</header><!-- /header -->
+		</div>
+		{% for post in site.posts %}
+		<article>
+			<div class="row">
+				<div class="col-xs-12">
+					<header id="header" class="">
+						<h3>{{ post.title }}</h3>
+						<p><i class="fa fa-calendar"></i> {% include spanishdate date=post.date %}</p>
+					</header><!-- /header -->
+					{{ post.content }}
+				</div>
+			</div>
+		</article>
+		{% endfor %}
 	</div>
 </section>
 <script src="js/jquery-1.11.0.min.js"></script>
