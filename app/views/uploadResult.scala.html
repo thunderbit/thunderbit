@@ -1,7 +1,7 @@
-@(id: String)
+@(fileName: String)
 
 @main("Nuevo fichero agregado") {
-    <p>El fichero ha recibido el ID <a href="@routes.Storage.download(id)">@id</a></p>
+    <p>Has agregado el fichero <strong>@fileName</strong></p>
 
     <a href="@routes.Storage.uploadForm()">+ Agregar otro</a>
     <a href="@routes.Application.index()">Ir a la página principal</a>
