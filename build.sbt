@@ -9,7 +9,9 @@ scalaVersion := "2.11.6"
 libraryDependencies ++= Seq(
   javaJdbc,
   cache,
-  javaWs
+  javaWs,
+  "org.mongodb" % "mongodb-driver-async" % "3.0.4",
+  "fr.javatic.mongo" % "mongo-jackson-codec" % "3.0.4__0.2"
 )
 
 // Play provides two styles of routers, one expects its actions to be injected, the
