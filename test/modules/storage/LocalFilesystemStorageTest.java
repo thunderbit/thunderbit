@@ -1,3 +1,5 @@
+package modules.storage;
+
 import modules.storage.LocalFilesystemStorage;
 import modules.storage.Storage;
 import org.junit.After;
