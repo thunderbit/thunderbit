@@ -5,6 +5,6 @@ import com.google.inject.AbstractModule;
 public class MongoDBModule extends AbstractModule {
     @Override
     protected void configure() {
-        bind (MongoDB.class).asEagerSingleton();
+        bind (MongoDB.class).to(MongoDBImp.class).asEagerSingleton();
     }
 }
