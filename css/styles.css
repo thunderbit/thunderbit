@@ -22,3 +22,22 @@ header {
 		font-size: 21px;
 	}
 }
+
+.social-buttons {
+	padding-top: 20px;
+}
+
+.social-buttons a {
+	border-bottom: 2px solid rgba(255,255,255,0);
+	color: #FFFFFF;
+	margin: 0px 20px;
+	padding-bottom: 10px;
+	transition:all .1s ease-in-out;
+}
+
+.social-buttons a:hover {
+	border-bottom: 2px solid rgba(255,255,255,0.9);
+	margin: 0px;
+	padding: 0px 20px 10px 20px;
+	transition:all .1s ease-in-out;
+}
