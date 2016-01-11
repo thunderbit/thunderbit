@@ -1,14 +1,30 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
+import com.google.inject.Inject;
+import com.mongodb.async.client.FindIterable;
+import models.Item;
+import modules.mongodb.MongoDB;
+import play.libs.F;
+import play.mvc.Controller;
+import play.mvc.Result;
+import scala.concurrent.Promise;
+import scala.concurrent.Promise$;
+import views.html.index;
 
-import views.html.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Application extends Controller {
+    @Inject
+    public MongoDB mongoDB;
 
-    public Result index() {
-        return ok(index.render("Your new application is ready."));
+    public F.Promise<Result> index() {
+        Promise<List<Item>> promise = Promise$.MODULE$.apply();
+
+        FindIterable<Item> itemsIterable = mongoDB.getDatabase().getCollection("items", Item.class).find();
+
+        itemsIterable.into(new ArrayList<>(), (items, throwable) -> promise.success(items));
+
+        return F.Promise.wrap(promise.future()).map((F.Function<List<Item>, Result>) items -> ok(index.render(items)));
     }
-
 }

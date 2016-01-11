@@ -1,6 +1,14 @@
-@(message: String)
+@(items: List[Item])
 
 @main("Welcome to Play") {
 	<h1>Hola mundo!</h1>
 	<p>-- Aplicación en desarrollo --</p>
+
+    <ul>
+        @for(item <- items) {
+        <li><a href="@routes.Storage.download(item.id)">@item.name</a></li>
+        }
+    </ul>
+
+	<a href="@routes.Storage.uploadForm()">+ Agregar fichero</a>
 }
