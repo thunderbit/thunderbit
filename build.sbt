@@ -6,6 +6,8 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
 scalaVersion := "2.11.6"
 
+resolvers += "ylemoigne-maven" at "https://dl.bintray.com/ylemoigne/maven/"
+
 libraryDependencies ++= Seq(
   javaJdbc,
   cache,
