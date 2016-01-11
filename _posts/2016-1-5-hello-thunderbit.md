@@ -5,7 +5,7 @@ Llevamos ya un mes y algo trabajando en el proyecto Thunderbit, sin embargo no p
 
 **¿Quiénes somos?**
 
-Somos tres jóvenes cubanos [[1]](#team), ávidos de retos y nuevos conocimientos. Utilizamos las tecnologías de la información y las comunicaciones a diario, y para nuestro placer también participamos en su desarrollo. Algunos estudiamos, otros trabajamos, en la [Universidad de Camagüey](http://www.reduc.edu.cu).
+Somos tres jóvenes cubanos, <a href="https://www.linkedin.com/in/jcmejiasrodriguez">Juan Carlos</a>, <a href="https://www.linkedin.com/in/yuri-moragas-b29030a9">Yuri</a> y <a href="https://www.linkedin.com/in/doniet-vélez-1a109483">Doniet</a>, ávidos de retos y nuevos conocimientos. Utilizamos las tecnologías de la información y las comunicaciones a diario, y para nuestro placer también participamos en su desarrollo. Algunos estudiamos, otros trabajamos, en la [Universidad de Camagüey](http://www.reduc.edu.cu).
 
 **¿De dónde venimos?**
 
@@ -30,5 +30,3 @@ Tras realizar un análisis no exhaustivo de los principales sistemas de gestión
 ¡Exacto! Bueno, no tan literalmente, pero ese es el espíritu. En los próximos meses estaremos investigando sobre todo lo necesario para implementar nuestra idea, programando, haciendo puebas, y por supuesto compartiendo cada avance. Para cuando acabe el certamen, en mayo, debemos tener una aplicación funcional lista para su uso en producción.
 
 ¿Te gusta como suena? Pues mantente al tanto de los nuevos posts en el blog y síguenos [@thunderbitdev](http://twitter.com/thunderbitdev). En próximos posts daremos detalles de cómo estamos llevando el desarrollo del proyecto.
-
-<p id="team"><a href="https://www.linkedin.com/in/jcmejiasrodriguez">Juan Carlos</a>, <a href="https://www.linkedin.com/in/yuri-moragas-b29030a9">Yuri</a> y <a href="https://www.linkedin.com/in/doniet-vélez-1a109483">Doniet</a></p>
