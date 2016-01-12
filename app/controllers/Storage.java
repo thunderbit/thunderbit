@@ -1,5 +1,6 @@
 package controllers;
 
+import akka.dispatch.Futures;
 import com.google.inject.Inject;
 import com.mongodb.async.client.FindIterable;
 import com.mongodb.async.client.MongoCollection;
@@ -11,7 +12,6 @@ import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import scala.concurrent.Promise;
-import scala.concurrent.Promise$;
 import views.html.uploadForm;
 import views.html.uploadResult;
 
@@ -46,7 +46,7 @@ public class Storage extends Controller {
                 item.name = fileName;
                 item.storageKey = uuid;
 
-                Promise<Void> databaseScalaPromise = Promise$.MODULE$.apply();
+                Promise<Void> databaseScalaPromise = Futures.promise();
 
                 MongoCollection<Item> items = mongoDB.getDatabase().getCollection("items", Item.class);
                 items.insertOne(item, (anotherVoid, throwable) -> databaseScalaPromise.success(anotherVoid));
@@ -59,7 +59,7 @@ public class Storage extends Controller {
     }
 
     public F.Promise<Result> download(String id) {
-        Promise<F.Tuple<Path, String>> promise = Promise$.MODULE$.apply();
+        Promise<F.Tuple<Path, String>> promise = Futures.promise();
 
         FindIterable<Item> itemsIterable = mongoDB.getDatabase().getCollection("items", Item.class)
                 .find().filter(eq("_id", new ObjectId(id)));

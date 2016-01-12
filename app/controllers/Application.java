@@ -1,5 +1,6 @@
 package controllers;
 
+import akka.dispatch.Futures;
 import com.google.inject.Inject;
 import com.mongodb.async.client.FindIterable;
 import models.Item;
@@ -8,7 +9,6 @@ import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Result;
 import scala.concurrent.Promise;
-import scala.concurrent.Promise$;
 import views.html.index;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class Application extends Controller {
     public MongoDB mongoDB;
 
     public F.Promise<Result> index() {
-        Promise<List<Item>> promise = Promise$.MODULE$.apply();
+        Promise<List<Item>> promise = Futures.promise();
 
         FindIterable<Item> itemsIterable = mongoDB.getDatabase().getCollection("items", Item.class).find();
 
