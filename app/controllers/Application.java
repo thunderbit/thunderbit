@@ -25,6 +25,8 @@ public class Application extends Controller {
 
         itemsIterable.into(new ArrayList<>(), (items, throwable) -> promise.success(items));
 
-        return F.Promise.wrap(promise.future()).map((F.Function<List<Item>, Result>) items -> ok(index.render(items)));
+        return F.Promise.wrap(promise.future())
+                .map((F.Function<List<Item>, Result>) items -> ok(index.render(items)))
+                .recover(throwable -> internalServerError(throwable.getMessage()));
     }
 }

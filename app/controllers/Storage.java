@@ -51,8 +51,10 @@ public class Storage extends Controller {
                 MongoCollection<Item> items = mongoDB.getDatabase().getCollection("items", Item.class);
                 items.insertOne(item, (anotherVoid, throwable) -> databaseScalaPromise.success(anotherVoid));
 
-                return F.Promise.wrap(databaseScalaPromise.future()).map((F.Function<Void, Result>) anotherVoid -> ok(uploadResult.render(fileName)));
-            });
+                return F.Promise.wrap(databaseScalaPromise.future())
+                        .map((F.Function<Void, Result>) anotherVoid -> ok(uploadResult.render(fileName)))
+                        .recover(throwable -> internalServerError(throwable.getMessage()));
+            }).recover(throwable -> internalServerError(throwable.getMessage()));
         } else {
             return F.Promise.pure(badRequest());
         }
@@ -69,6 +71,6 @@ public class Storage extends Controller {
         return F.Promise.wrap(promise.future()).map((F.Function<F.Tuple<Path, String>, Result>) pathStringTuple -> {
             response().setHeader("Content-Disposition", "attachment; filename="+pathStringTuple._2);
             return ok(pathStringTuple._1.toFile());
-        });
+        }).recover(throwable -> internalServerError(throwable.getMessage()));
     }
 }
