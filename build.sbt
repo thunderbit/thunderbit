@@ -13,7 +13,8 @@ libraryDependencies ++= Seq(
   cache,
   javaWs,
   "org.mongodb" % "mongodb-driver-async" % "3.2.0",
-  "fr.javatic.mongo" % "mongo-jackson-codec" % "3.2.0__0.3"
+  "fr.javatic.mongo" % "mongo-jackson-codec" % "3.2.0__0.3",
+  "junit" % "junit" % "4.11"
 )
 
 // Play provides two styles of routers, one expects its actions to be injected, the
