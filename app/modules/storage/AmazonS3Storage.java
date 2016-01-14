@@ -1,18 +1,23 @@
 package modules.storage;
 
 import akka.dispatch.Futures;
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.event.ProgressEventType;
 import com.amazonaws.event.ProgressListener;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
+import com.amazonaws.services.s3.model.GetBucketLocationRequest;
 import com.amazonaws.services.s3.transfer.Download;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 import com.google.inject.Inject;
 import play.Configuration;
+import play.Logger;
 import play.libs.F;
 import scala.concurrent.Promise;
 
@@ -31,6 +36,37 @@ public class AmazonS3Storage implements Storage {
         String accessKey = configuration.getString("storage.s3.accesskey");
         String secretKey = configuration.getString("storage.s3.secretkey");
         credentials = new BasicAWSCredentials(accessKey, secretKey);
+
+        AmazonS3 amazonS3 = new AmazonS3Client(credentials);
+
+        try {
+            if(!(amazonS3.doesBucketExist(bucketName))) {
+                amazonS3.createBucket(new CreateBucketRequest(bucketName));
+            }
+
+            String bucketLocation = amazonS3.getBucketLocation(new GetBucketLocationRequest(bucketName));
+            Logger.info("Amazon S3 bucket created at " + bucketLocation);
+        } catch (AmazonServiceException ase) {
+            Logger.error("Caught an AmazonServiceException, which " +
+                    "means your request made it " +
+                    "to Amazon S3, but was rejected with an error response " +
+                    "for some reason." +
+                    " Error Message: " + ase.getMessage() +
+                    " HTTP Status Code: " + ase.getStatusCode() +
+                    " AWS Error Code: " + ase.getErrorCode() +
+                    " Error Type: " + ase.getErrorType() +
+                    " Request ID: " + ase.getRequestId()
+            );
+        } catch (AmazonClientException ace) {
+            Logger.error("Caught an AmazonClientException, which " +
+                    "means the client encountered " +
+                    "an internal error while trying to " +
+                    "communicate with S3, " +
+                    "such as not being able to access the network." +
+                    " Error Message: " + ace.getMessage()
+            );
+        }
+
     }
 
     @Override
