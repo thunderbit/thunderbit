@@ -31,7 +31,7 @@ public class AmazonS3Storage implements Storage {
 
     @Inject
     public AmazonS3Storage (Configuration configuration) {
-        bucketName = configuration.getString("storage.s3.bucketName");
+        bucketName = configuration.getString("storage.s3.bucket");
 
         String accessKey = configuration.getString("storage.s3.accesskey");
         String secretKey = configuration.getString("storage.s3.secretkey");
