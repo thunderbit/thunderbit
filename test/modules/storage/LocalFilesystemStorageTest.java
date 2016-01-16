@@ -1,7 +1,5 @@
 package modules.storage;
 
-import modules.storage.LocalFilesystemStorage;
-import modules.storage.Storage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -53,13 +51,6 @@ public class LocalFilesystemStorageTest {
         storage.store(testFile, id).get(500);
         Path storedTestFile = storagePath.resolve(id);
         assertThat(Files.exists(storedTestFile), is(true));
-    }
-
-    @Test
-    public void testFileIsRetrieved () throws IOException {
-        Path testFile = Files.createFile(storagePath.resolve(UUID.randomUUID().toString()));
-        Path retrievedTestFile = storage.retrieve(testFile.getFileName().toString()).get(500);
-        assertThat(Files.exists(retrievedTestFile), is(true));
     }
 
     @Test
