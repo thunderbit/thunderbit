@@ -3,11 +3,14 @@ package modules.storage;
 import com.google.inject.Inject;
 import play.Configuration;
 import play.libs.F;
+import play.mvc.Result;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import static play.mvc.Results.ok;
 
 public class LocalFilesystemStorage implements Storage {
     private Path storagePath;
@@ -32,8 +35,8 @@ public class LocalFilesystemStorage implements Storage {
     }
 
     @Override
-    public F.Promise<Path> retrieve(String key) {
-        return F.Promise.promise(() -> storagePath.resolve(key));
+    public F.Promise<Result> getDownload(String key, String name) {
+        return F.Promise.pure(ok(storagePath.resolve(key).toFile()));
     }
 
     @Override

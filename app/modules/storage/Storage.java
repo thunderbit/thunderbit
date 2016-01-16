@@ -1,6 +1,7 @@
 package modules.storage;
 
 import play.libs.F;
+import play.mvc.Result;
 
 import java.nio.file.Path;
 
@@ -16,12 +17,14 @@ public interface Storage {
     F.Promise<Void> store (Path file, String key);
 
     /**
-     * Retrieves a stored file
+     * Gets a download for a stored file
      *
      * @param   key
      *          The stored file key
+     * @param   name
+     *          The name for the file
      */
-    F.Promise<Path> retrieve (String key);
+    F.Promise<Result> getDownload (String key, String name);
 
     /**
      * Deletes a stored file

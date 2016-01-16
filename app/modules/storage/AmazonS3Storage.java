@@ -19,11 +19,14 @@ import com.google.inject.Inject;
 import play.Configuration;
 import play.Logger;
 import play.libs.F;
+import play.mvc.Result;
 import scala.concurrent.Promise;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import static play.mvc.Results.ok;
 
 public class AmazonS3Storage implements Storage {
     private final AWSCredentials credentials;
@@ -92,8 +95,8 @@ public class AmazonS3Storage implements Storage {
     }
 
     @Override
-    public F.Promise<Path> retrieve(String key) {
-        Promise<Path> promise = Futures.promise();
+    public F.Promise<Result> getDownload(String key, String name) {
+        Promise<Result> promise = Futures.promise();
 
         TransferManager transferManager = new TransferManager(credentials);
 
@@ -106,7 +109,7 @@ public class AmazonS3Storage implements Storage {
                 if (progressEvent.getEventType().isTransferEvent()) {
                     if (progressEvent.getEventType().equals(ProgressEventType.TRANSFER_COMPLETED_EVENT)) {
                         transferManager.shutdownNow();
-                        promise.success(path);
+                        promise.success(ok (path.toFile()));
                     } else if (progressEvent.getEventType().equals(ProgressEventType.TRANSFER_FAILED_EVENT)) {
                         transferManager.shutdownNow();
                         promise.failure(new Exception("Download failed"));

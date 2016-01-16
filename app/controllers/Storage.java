@@ -15,7 +15,6 @@ import scala.concurrent.Promise;
 import views.html.uploadForm;
 import views.html.uploadResult;
 
-import java.nio.file.Path;
 import java.util.UUID;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -61,16 +60,18 @@ public class Storage extends Controller {
     }
 
     public F.Promise<Result> download(String id) {
-        Promise<F.Tuple<Path, String>> promise = Futures.promise();
+        Promise<F.Tuple<Result, String>> promise = Futures.promise();
 
         FindIterable<Item> itemsIterable = mongoDB.getDatabase().getCollection("items", Item.class)
                 .find().filter(eq("_id", new ObjectId(id)));
 
-        itemsIterable.first((item, throwable) -> storage.retrieve(item.storageKey).map(path -> promise.success(F.Tuple(path, item.name))));
+        itemsIterable.first((item, throwable) ->
+                storage.getDownload(item.storageKey, item.name).map(result ->
+                        promise.success(F.Tuple(result, item.name))));
 
-        return F.Promise.wrap(promise.future()).map((F.Function<F.Tuple<Path, String>, Result>) pathStringTuple -> {
-            response().setHeader("Content-Disposition", "attachment; filename="+pathStringTuple._2);
-            return ok(pathStringTuple._1.toFile());
+        return F.Promise.wrap(promise.future()).map(resultStringTuple -> {
+            response().setHeader("Content-Disposition", "attachment; filename="+resultStringTuple._2);
+            return resultStringTuple._1;
         }).recover(throwable -> internalServerError(throwable.getMessage()));
     }
 }
