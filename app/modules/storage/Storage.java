@@ -6,28 +6,28 @@ import java.nio.file.Path;
 
 public interface Storage {
     /**
-     * Guardar un fichero
+     * Stores a file
      *
      * @param   file
-     *          El fichero a guardar
+     *          The file to store
      * @param   key
-     *          El identificador que se le va a asignar
+     *          A key for the stored file
      */
     F.Promise<Void> store (Path file, String key);
 
     /**
-     * Recuperar un fichero
+     * Retrieves a stored file
      *
      * @param   key
-     *          El identificador del fichero
+     *          The stored file key
      */
     F.Promise<Path> retrieve (String key);
 
     /**
-     * Eliminar un fichero
+     * Deletes a stored file
      *
      * @param   key
-     *          El identificador del fichero
+     *          The stored file key
      */
     F.Promise<Void> delete (String key);
 }
