@@ -9,10 +9,7 @@ import com.amazonaws.event.ProgressEventType;
 import com.amazonaws.event.ProgressListener;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.CreateBucketRequest;
-import com.amazonaws.services.s3.model.DeleteObjectRequest;
-import com.amazonaws.services.s3.model.GetBucketLocationRequest;
-import com.amazonaws.services.s3.transfer.Download;
+import com.amazonaws.services.s3.model.*;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 import com.google.inject.Inject;
@@ -22,11 +19,11 @@ import play.libs.F;
 import play.mvc.Result;
 import scala.concurrent.Promise;
 
-import java.io.IOException;
-import java.nio.file.Files;
+import java.net.URL;
 import java.nio.file.Path;
 
-import static play.mvc.Results.ok;
+import static play.mvc.Results.internalServerError;
+import static play.mvc.Results.redirect;
 
 public class AmazonS3Storage implements Storage {
     private final AWSCredentials credentials;
@@ -96,31 +93,27 @@ public class AmazonS3Storage implements Storage {
 
     @Override
     public F.Promise<Result> getDownload(String key, String name) {
-        Promise<Result> promise = Futures.promise();
+        GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucketName, key);
+        ResponseHeaderOverrides responseHeaders = new ResponseHeaderOverrides();
+        responseHeaders.setContentDisposition("attachment; filename="+name);
+        generatePresignedUrlRequest.setResponseHeaders(responseHeaders);
 
-        TransferManager transferManager = new TransferManager(credentials);
+        AmazonS3 amazonS3 = new AmazonS3Client(credentials);
 
         try {
-            Path path = Files.createTempFile(key, "");
+            URL url = amazonS3.generatePresignedUrl(generatePresignedUrlRequest);
 
-            Download download = transferManager.download(bucketName, key, path.toFile());
-
-            download.addProgressListener((ProgressListener) progressEvent -> {
-                if (progressEvent.getEventType().isTransferEvent()) {
-                    if (progressEvent.getEventType().equals(ProgressEventType.TRANSFER_COMPLETED_EVENT)) {
-                        transferManager.shutdownNow();
-                        promise.success(ok (path.toFile()));
-                    } else if (progressEvent.getEventType().equals(ProgressEventType.TRANSFER_FAILED_EVENT)) {
-                        transferManager.shutdownNow();
-                        promise.failure(new Exception("Download failed"));
-                    }
-                }
-            });
-        } catch (IOException e) {
-            promise.failure(e);
+            return F.Promise.pure(redirect(url.toString()));
+        } catch (AmazonClientException ace) {
+            Logger.error("Caught an AmazonClientException, which " +
+                    "means the client encountered " +
+                    "an internal error while trying to " +
+                    "communicate with S3, " +
+                    "such as not being able to access the network." +
+                    " Error Message: " + ace.getMessage()
+            );
+            return F.Promise.pure(internalServerError("Download failed"));
         }
-
-        return F.Promise.wrap(promise.future());
     }
 
     @Override
