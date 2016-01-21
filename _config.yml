@@ -1,2 +1,4 @@
 # Server
+baseurl:          /thunderbit
+
 exclude:          [.gitignore,README.md]
