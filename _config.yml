@@ -2,3 +2,11 @@
 baseurl:          /thunderbit
 
 exclude:          [.gitignore,README.md]
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "post"
+    values:
+      layout: "post"

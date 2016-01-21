@@ -38,7 +38,7 @@ layout: basic
 			<div class="row">
 				<div class="col-xs-12">
 					<header id="header" class="">
-						<h3>{{ post.title }}</h3>
+						<h3><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h3>
 						<p><i class="fa fa-calendar"></i> {% include spanishdate date=post.date %}</p>
 					</header><!-- /header -->
 					{{ post.content }}
