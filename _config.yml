@@ -1,4 +1,6 @@
 # Server
+permalink:        pretty
+
 baseurl:          /thunderbit
 
 exclude:          [.gitignore,README.md]
