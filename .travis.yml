@@ -1,0 +1,17 @@
+language: scala
+
+jdk:
+  - oraclejdk8
+
+scala:
+  - 2.11.6
+
+script:
+  - sbt test
+
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+
+before_cache:
+ -  find $HOME/.ivy2/cache -name "ivydata-*.properties" | xargs rm
