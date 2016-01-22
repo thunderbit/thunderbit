@@ -1,0 +1,25 @@
+@(form: Form[Authentication.Login])
+
+@main("Login") {
+    @helper.form(routes.Authentication.doLogin) {
+        @if(form.hasGlobalErrors) {
+            <p class="error">
+                @form.globalError.message
+            </p>
+        }
+
+        @if(flash.contains("success")) {
+            <p class="success">
+                @flash.get("success")
+            </p>
+        }
+
+        <input type="text" name="name" placeholder="User name" value="@form("name").value">
+
+        <input type="password" name="password" placeholder="Password">
+
+        <button type="submit">Login</button>
+	}
+
+	<a href="@routes.Application.index()">Go to the index</a>
+}
