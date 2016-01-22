@@ -1,8 +1,10 @@
 @(items: List[Item])
 
+@import play.i18n._
+
 @main("Welcome to Play") {
 	<h1>Hola mundo!</h1>
-	<p>-- Aplicación en desarrollo --</p>
+	<p>-- @Messages.get("underDevelopment") --</p>
 
     <ul>
         @for(item <- items) {
@@ -10,5 +12,5 @@
         }
     </ul>
 
-	<a href="@routes.Storage.uploadForm()">+ Agregar fichero</a>
+	<a href="@routes.Storage.uploadForm()">+ @Messages.get("uploadFile")</a>
 }
