@@ -3,8 +3,14 @@
 @import play.i18n._
 
 @main(Messages.get("fileUploaded")) {
-    <p>@Messages.get("youHaveUploadedTheFile", fileName)</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <p>@Messages.get("youHaveUploadedTheFile", fileName)</p>
 
-    <a href="@routes.Storage.uploadForm()">+ @Messages.get("uploadAnother")</a>
-    <a href="@routes.Application.index()">@Messages.get("home")</a>
+                <a href="@routes.Storage.uploadForm()" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> @Messages.get("uploadAnother")</a>
+                <a href="@routes.Application.index()" class="btn btn-default"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> @Messages.get("home")</a>
+            </div>
+        </div>
+    </div>
 }
