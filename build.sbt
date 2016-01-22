@@ -15,7 +15,11 @@ libraryDependencies ++= Seq(
   "org.mongodb" % "mongodb-driver-async" % "3.2.0",
   "fr.javatic.mongo" % "mongo-jackson-codec" % "3.2.0__0.3",
   "junit" % "junit" % "4.11",
-  "com.amazonaws" % "aws-java-sdk-s3" % "1.10.44"
+  "com.amazonaws" % "aws-java-sdk-s3" % "1.10.44",
+  "org.webjars" %% "webjars-play" % "2.4.0-2",
+  "org.webjars" % "requirejs" % "2.1.22",
+  "org.webjars" % "jquery" % "1.11.1",
+  "org.webjars" % "bootstrap" % "3.3.6"
 )
 
 // Play provides two styles of routers, one expects its actions to be injected, the
