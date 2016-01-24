@@ -9,3 +9,4 @@ pleaseSignIn=Identifíquese por favor
 userName=Nombre de usuario
 password=Contraseña
 signIn=Acceder
+signOut=Salir
