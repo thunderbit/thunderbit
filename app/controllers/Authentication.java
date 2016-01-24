@@ -24,7 +24,7 @@ public class Authentication extends Controller {
 
     public Result logout () {
         session().clear();
-        flash("success", "You've been logged out");
+        flash("success", "youHaveBeenLoggedOut");
         return redirect(routes.Authentication.login());
     }
 
@@ -39,7 +39,7 @@ public class Authentication extends Controller {
             if (name.equals(authenticationUsername) && password.equals(authenticationPassword)) {
                 return null;
             } else {
-                return "Invalid user or password";
+                return "invalidUsernameOrPassword";
             }
         }
     }

@@ -12,13 +12,13 @@
             <h2 class="form-signin-heading">@Messages.get("pleaseSignIn")</h2>
             @if(form.hasGlobalErrors) {
                 <div class="alert alert-danger" role="alert">
-                    @form.globalError.message
+                    @Messages.get(form.globalError.message)
                 </div>
             }
 
             @if(flash.contains("success")) {
                 <div class="alert alert-success" role="alert">
-                    @flash.get("success")
+                    @Messages.get(flash.get("success"))
                 </div>
             }
 

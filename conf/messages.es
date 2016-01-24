@@ -10,3 +10,5 @@ userName=Nombre de usuario
 password=Contraseña
 signIn=Acceder
 signOut=Salir
+youHaveBeenLoggedOut=Has salido
+invalidUsernameOrPassword=Nombre de usuario o contraseña incorrectos
