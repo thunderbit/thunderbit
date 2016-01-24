@@ -1,7 +1,9 @@
-@main("Agregar fichero") {
+@import play.i18n._
+
+@main(Messages.get("uploadFile")) {
 	@helper.form(action = routes.Storage.upload, 'enctype -> "multipart/form-data") {
-		<input type="file" name="file"><button type="submit">Enviar</button>
+		<input type="file" name="file"><button type="submit">@Messages.get("upload")</button>
 	}
 
-	<a href="@routes.Application.index()">Ir a la pagina principal</a>
+	<a href="@routes.Application.index()">@Messages.get("home")</a>
 }

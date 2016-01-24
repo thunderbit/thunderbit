@@ -1,8 +1,10 @@
 @(fileName: String)
 
-@main("Nuevo fichero agregado") {
-    <p>Has agregado el fichero <strong>@fileName</strong></p>
+@import play.i18n._
 
-    <a href="@routes.Storage.uploadForm()">+ Agregar otro</a>
-    <a href="@routes.Application.index()">Ir a la página principal</a>
+@main(Messages.get("fileUploaded")) {
+    <p>@Messages.get("youHaveUploadedTheFile", fileName)</p>
+
+    <a href="@routes.Storage.uploadForm()">+ @Messages.get("uploadAnother")</a>
+    <a href="@routes.Application.index()">@Messages.get("home")</a>
 }
