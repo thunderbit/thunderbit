@@ -1,6 +1,7 @@
 package controllers;
 
 import akka.dispatch.Futures;
+import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.google.inject.Inject;
 import com.mongodb.async.client.FindIterable;
 import com.mongodb.async.client.MongoCollection;
@@ -11,7 +12,6 @@ import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import play.mvc.Security;
 import scala.concurrent.Promise;
 import views.html.uploadForm;
 import views.html.uploadResult;
@@ -27,12 +27,12 @@ public class Storage extends Controller {
     @Inject
     public MongoDB mongoDB;
 
-    @Security.Authenticated(Secured.class)
+    @SubjectPresent
     public Result uploadForm() {
         return ok(uploadForm.render());
     }
 
-    @Security.Authenticated(Secured.class)
+    @SubjectPresent
     public F.Promise<Result> upload() {
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart file = body.getFile("file");
