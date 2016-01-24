@@ -3,14 +3,20 @@
 @import play.i18n._
 
 @main("Welcome to Play") {
-	<h1>Hola mundo!</h1>
-	<p>-- @Messages.get("underDevelopment") --</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Hola mundo!</h1>
+                <p>-- @Messages.get("underDevelopment") --</p>
 
-    <ul>
-        @for(item <- items) {
-        <li><a href="@routes.Storage.download(item.id)">@item.name</a></li>
-        }
-    </ul>
+                <ul>
+                    @for(item <- items) {
+                    <li><a href="@routes.Storage.download(item.id)">@item.name</a></li>
+                    }
+                </ul>
 
-	<a href="@routes.Storage.uploadForm()">+ @Messages.get("uploadFile")</a>
+                <a href="@routes.Storage.uploadForm()" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> @Messages.get("uploadFile")</a>
+            </div>
+        </div>
+    </div>
 }
