@@ -57,7 +57,8 @@ layout: basic
 						<p><i class="fa fa-calendar"></i> {{ post.date | date_to_string}}</p>
 					</header><!-- /header -->
 					{{ post.excerpt }}
-					<a href="{{ site.baseurl }}{{ post.url }}">Read more...</a>
+					<p><a href="{{ site.baseurl }}{{ post.url }}">Read more...</a></p>
+					<p><a href="{{ site.baseurl }}{{ post.url }}#disqus_thread">Read comments...</a></p>
 				</div>
 			</div>
 		</article>
@@ -65,3 +66,4 @@ layout: basic
 	</div>
 </section>
 <script src="{{ site.baseurl }}/js/jquery-1.11.0.min.js"></script>
+<script id="dsq-count-scr" src="//thunderbit.disqus.com/count.js" async></script>

@@ -12,3 +12,4 @@ defaults:
       type: "post"
     values:
       layout: "post"
+      comments: true

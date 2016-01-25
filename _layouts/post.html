@@ -12,6 +12,9 @@ layout: basic
         </div>
         {{ content }}
         {% include social-share.html %}
+        {% if page.comments %}
+          {% include disqus-universal-code.html %}
+        {% endif %}
       </div>
     </div>
   </div>
