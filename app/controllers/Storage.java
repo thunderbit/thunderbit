@@ -1,6 +1,7 @@
 package controllers;
 
 import akka.dispatch.Futures;
+import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.google.inject.Inject;
 import com.mongodb.async.client.FindIterable;
 import com.mongodb.async.client.MongoCollection;
@@ -26,10 +27,12 @@ public class Storage extends Controller {
     @Inject
     public MongoDB mongoDB;
 
+    @SubjectPresent
     public Result uploadForm() {
         return ok(uploadForm.render());
     }
 
+    @SubjectPresent
     public F.Promise<Result> upload() {
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart file = body.getFile("file");

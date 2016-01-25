@@ -8,6 +8,10 @@ GET     /upload                     controllers.Storage.uploadForm()
 POST    /upload                     controllers.Storage.upload()
 GET     /download/:id               controllers.Storage.download(id: String)
 
+GET     /login                      controllers.Authentication.login
+POST    /login                      controllers.Authentication.doLogin
+GET     /logout                     controllers.Authentication.logout
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 GET     /webjars/*file              controllers.WebJarAssets.at(file)

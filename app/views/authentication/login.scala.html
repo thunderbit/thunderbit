@@ -1,0 +1,34 @@
+@(form: Form[Authentication.Login])
+
+@import play.i18n._
+
+@styles = {
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/signin.css")">
+}
+
+@main("Sign in", styles) {
+    <div class="container">
+        @helper.form(action = routes.Authentication.doLogin, 'class -> "form-signin") {
+            <h2 class="form-signin-heading">@Messages.get("pleaseSignIn")</h2>
+            @if(form.hasGlobalErrors) {
+                <div class="alert alert-danger" role="alert">
+                    @Messages.get(form.globalError.message)
+                </div>
+            }
+
+            @if(flash.contains("success")) {
+                <div class="alert alert-success" role="alert">
+                    @Messages.get(flash.get("success"))
+                </div>
+            }
+
+            <label for="name" class="sr-only">@Messages.get("userName")</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="@Messages.get("userName")" value="@form("name").value" required autofocus>
+
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="@Messages.get("password")" required>
+
+            <button type="submit" class="btn btn-lg btn-primary btn-block">@Messages.get("signIn")</button>
+        }
+    </div>
+}

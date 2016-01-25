@@ -1,6 +1,7 @@
 @(items: List[Item])
 
 @import play.i18n._
+@import be.objectify.deadbolt.java.views.html.subjectPresent
 
 @main("Welcome to Play") {
     <div class="container">
@@ -15,7 +16,9 @@
                     }
                 </ul>
 
-                <a href="@routes.Storage.uploadForm()" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> @Messages.get("uploadFile")</a>
+                @subjectPresent() {
+                    <a href="@routes.Storage.uploadForm()" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> @Messages.get("uploadFile")</a>
+                }
             </div>
         </div>
     </div>
