@@ -1,20 +1,15 @@
 body {
-	background-color: #F2EFE5;
+	background-color: #ffffff;
 }
 
 body > header {
 	background-color: #458BE1;
 	color: #FFFFFF;
-	margin-bottom: 35px;
 	padding: 35px;
 }
 
 body > header h1 {
 	font-size: 72px;
-}
-
-header {
-	margin-bottom: 35px;
 }
 
 header h1 a, header h1 a:hover, header h1 a:focus {
@@ -26,6 +21,16 @@ header h1 a, header h1 a:hover, header h1 a:focus {
 	body > header h1 {
 		font-size: 42px;
 	}
+}
+
+#features-container {
+	background-color: #E5ECF2;
+	padding-top: 30px;
+	padding-bottom: 25px;
+}
+
+#features-container header {
+	margin-bottom: 35px;
 }
 
 .social-buttons {
@@ -45,4 +50,32 @@ header h1 a, header h1 a:hover, header h1 a:focus {
 	margin: 0px;
 	padding: 0px 20px 10px 20px;
 	transition:all .1s ease-in-out;
+}
+
+#posts-container {
+	padding: 15px 0px 30px 0px;
+	background-color: #ffffff;
+}
+
+footer {
+	color: #fff;
+	background-color: #333;
+	padding: 15px 0px 15px 0px;
+	font-size:1em;
+}
+
+footer a {
+	color: #fff;
+}
+
+footer a:hover {
+	color: #fff;
+}
+
+footer a i {
+	color: red;
+}
+
+footer .lead hidden-xs {
+	color: #fff;
 }

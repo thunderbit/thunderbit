@@ -2,7 +2,7 @@
 layout: basic
 ---
 {% include header.html %}
-<section>
+<section id="features-container">
 	<div class="container">
 		<div class="row text-center">
 			<header>
@@ -41,11 +41,11 @@ layout: basic
 		</div>
 	</div>
 </section>
-<section class="posts-container">
+<section id="posts-container">
 	<div class="container">
 		<div class="row">
 			<header id="header" class="text-center">
-				<h2>Blog</h2>
+				<i ></i><h2 class="fa fa-book fa-5x">Blog</h2>
 			</header><!-- /header -->
 		</div>
 		{% for post in site.posts %}
@@ -65,5 +65,6 @@ layout: basic
 		{% endfor %}
 	</div>
 </section>
+{% include footer.html %}
 <script src="{{ site.baseurl }}/js/jquery-1.11.0.min.js"></script>
 <script id="dsq-count-scr" src="//thunderbit.disqus.com/count.js" async></script>
