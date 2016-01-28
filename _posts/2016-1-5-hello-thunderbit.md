@@ -1,7 +1,7 @@
 ---
-title: Hello Tunderbit!
+title: Hello Thunderbit!
 ---
-Llevamos ya un mes y algo trabajando en el proyecto Thunderbit, sin embargo no podemos decir que hemos realmente comezado que expliquemos qué es lo que estamos haciendo, y por qué lo hacemos. No tiene gracia trabajar en un proyecto de software libre sin decirle a nadie, ¿verdad?
+Llevamos ya un mes y algo trabajando en el proyecto Thunderbit, sin embargo no podemos decir que hemos realmente comenzado que expliquemos qué es lo que estamos haciendo, y por qué lo hacemos. No tiene gracia trabajar en un proyecto de software libre sin decirle a nadie, ¿verdad?
 
 **¿Quiénes somos?**
 
@@ -19,7 +19,7 @@ Queremos disponer de un sistema de gestión de contenidos digitales donde no ten
 
 Una buena solución puede ser un sistema que soporte etiquetado, pues bastarían algunas etiquetas para describir algo aproximado a lo que buscamos. Sin embargo, al aumentar la cantidad y variedad de los contenidos (y con estos la cantidad de etiquetas) podríamos fácilmente perdernos en el mar de información resultante, tanto al buscarlos como al introducirlos y etiquetarlos. Por eso se nos ocurrió crear un sistema que también, nos ayude a navegar en los grandes cúmulos de contenidos etiquetados.
 
-Durante las búsquedas este sistema debe sugerir etiquetas relacionadas con las que ya hemos puesto, lo que debería ayudarnos a encontrar lo que buscamos. Por otra parte, al etiquetar nuevos contenidos el sistema debe también sugerir etiquetas relacionadas con las que hemos puesto, ayudándonos a situar un determinado contenido lo mas "cerca" posible de sus semejantes.
+Durante las búsquedas este sistema debe sugerir etiquetas relacionadas con las que ya hemos puesto, lo que debería ayudarnos a encontrar lo que buscamos. Por otra parte, al etiquetar nuevos contenidos el sistema debe también sugerir etiquetas relacionadas con las que hemos puesto, ayudándonos a situar un determinado contenido lo más "cerca" posible de sus semejantes.
 
 Tras realizar un análisis no exhaustivo de los principales sistemas de gestión de contenidos digitales (Digital Assets Management, DAM) existentes no encontramos uno que reuniera las características mencionadas y además fuera software libre o de código abierto. Esto nos dio la luz verde para crear uno nosotros mismos, y con él participar en el certamen.
 
@@ -27,6 +27,6 @@ Tras realizar un análisis no exhaustivo de los principales sistemas de gestión
 
 > ¡Al infinito, y más allá!
 
-¡Exacto! Bueno, no tan literalmente, pero ese es el espíritu. En los próximos meses estaremos investigando sobre todo lo necesario para implementar nuestra idea, programando, haciendo puebas, y por supuesto compartiendo cada avance. Para cuando acabe el certamen, en mayo, debemos tener una aplicación funcional lista para su uso en producción.
+¡Exacto! Bueno, no tan literalmente, pero ese es el espíritu. En los próximos meses estaremos investigando sobre todo lo necesario para implementar nuestra idea, programando, haciendo pruebas, y por supuesto compartiendo cada avance. Para cuando acabe el certamen, en mayo, debemos tener una aplicación funcional lista para su uso en producción.
 
-¿Te gusta como suena? Pues mantente al tanto de los nuevos posts en el blog y síguenos [@thunderbitdev](http://twitter.com/thunderbitdev). En próximos posts daremos detalles de cómo estamos llevando el desarrollo del proyecto.
+¿Te gusta cómo suena? Pues mantente al tanto de los nuevos posts en el blog y síguenos [@thunderbitdev](http://twitter.com/thunderbitdev). En próximos posts daremos detalles de cómo estamos llevando el desarrollo del proyecto.
