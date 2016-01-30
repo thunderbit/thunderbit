@@ -1,11 +1,13 @@
 body {
-	background-color: #ffffff;
+	background: #ffffff url("../static/img/top_back.jpg") top center fixed no-repeat;
 }
 
 body > header {
-	background-color: #458BE1;
+	#background-color: #458BE1;
+	background-color: rgba(0,0,0,0.4);
 	color: #FFFFFF;
 	padding: 35px;
+	height:628px;
 }
 
 body > header h1 {
@@ -15,6 +17,10 @@ body > header h1 {
 header h1 a, header h1 a:hover, header h1 a:focus {
 	color: #FFFFFF;
 	text-decoration: none;
+}
+
+header .container {
+	margin-top: 173px;
 }
 
 @media (max-width:768px) {
