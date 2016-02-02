@@ -1,6 +1,6 @@
 
 body > header {
-	background: #ffffff url("../static/img/top_back.jpg") top center fixed no-repeat;
+	background: #ffffff url("../images/top_back.jpg") top center fixed no-repeat;
 	background-color: rgba(0,0,0,0.4);
 	color: #FFFFFF;
 	padding: 35px;
