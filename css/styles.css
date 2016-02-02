@@ -3,7 +3,6 @@ body {
 }
 
 body > header {
-	#background-color: #458BE1;
 	background-color: rgba(0,0,0,0.4);
 	color: #FFFFFF;
 	padding: 35px;
