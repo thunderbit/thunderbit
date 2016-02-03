@@ -33,6 +33,8 @@ public interface Storage {
      *
      * @param   key
      *          The stored file key
+     * @param   name
+     *          The stored file name
      */
-    F.Promise<Void> delete (String key);
+    F.Promise<Void> delete (String key, String name);
 }

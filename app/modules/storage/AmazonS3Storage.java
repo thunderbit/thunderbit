@@ -118,7 +118,7 @@ public class AmazonS3Storage implements Storage {
     }
 
     @Override
-    public F.Promise<Void> delete(String key) {
+    public F.Promise<Void> delete(String key, String name) {
         Promise<Void> promise = Futures.promise();
 
         AmazonS3 amazonS3 = new AmazonS3Client(credentials);
