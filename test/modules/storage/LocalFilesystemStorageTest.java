@@ -48,8 +48,8 @@ public class LocalFilesystemStorageTest {
     public void testFileIsStored () throws IOException {
         String id = UUID.randomUUID().toString();
         Path testFile = Files.createTempFile("testFile", "temp");
-        storage.store(testFile, id).get(500);
-        Path storedTestFile = storagePath.resolve(id);
+        storage.store(testFile, id, testFile.toFile().getName()).get(500);
+        Path storedTestFile = storagePath.resolve(id).resolve(testFile.toFile().getName());
         assertThat(Files.exists(storedTestFile), is(true));
     }
 

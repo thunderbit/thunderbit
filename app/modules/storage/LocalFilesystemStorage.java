@@ -27,16 +27,17 @@ public class LocalFilesystemStorage implements Storage {
     }
 
     @Override
-    public F.Promise<Void> store(Path file, String key) {
+    public F.Promise<Void> store(Path file, String key, String name) {
         return F.Promise.promise(() -> {
-            Files.copy(file, storagePath.resolve(key));
+            Path keyPath = Files.createDirectory(storagePath.resolve(key));
+            Files.copy(file, keyPath.resolve(name));
             return null;
         });
     }
 
     @Override
     public F.Promise<Result> getDownload(String key, String name) {
-        return F.Promise.pure(ok(storagePath.resolve(key).toFile()));
+        return F.Promise.pure(ok(storagePath.resolve(key).resolve(name).toFile()));
     }
 
     @Override

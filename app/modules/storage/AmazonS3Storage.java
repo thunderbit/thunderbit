@@ -70,7 +70,7 @@ public class AmazonS3Storage implements Storage {
     }
 
     @Override
-    public F.Promise<Void> store(Path path, String key) {
+    public F.Promise<Void> store(Path path, String key, String name) {
         Promise<Void> promise = Futures.promise();
 
         TransferManager transferManager = new TransferManager(credentials);

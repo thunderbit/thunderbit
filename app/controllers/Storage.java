@@ -41,7 +41,7 @@ public class Storage extends Controller {
             String fileName = file.getFilename();
             String uuid = UUID.randomUUID().toString();
 
-            F.Promise<Void> storagePromise = storage.store(file.getFile().toPath(), uuid);
+            F.Promise<Void> storagePromise = storage.store(file.getFile().toPath(), uuid, file.getFilename());
 
             return storagePromise.flatMap(aVoid -> {
                 Item item = new Item();
@@ -63,18 +63,15 @@ public class Storage extends Controller {
     }
 
     public F.Promise<Result> download(String id) {
-        Promise<F.Tuple<Result, String>> promise = Futures.promise();
+        Promise<Result> promise = Futures.promise();
 
         FindIterable<Item> itemsIterable = mongoDB.getDatabase().getCollection("items", Item.class)
                 .find().filter(eq("_id", new ObjectId(id)));
 
         itemsIterable.first((item, throwable) ->
-                storage.getDownload(item.storageKey, item.name).map(result ->
-                        promise.success(F.Tuple(result, item.name))));
+                storage.getDownload(item.storageKey, item.name).map(promise::success));
 
-        return F.Promise.wrap(promise.future()).map(resultStringTuple -> {
-            response().setHeader("Content-Disposition", "attachment; filename="+resultStringTuple._2);
-            return resultStringTuple._1;
-        }).recover(throwable -> internalServerError(throwable.getMessage()));
+        return F.Promise.wrap(promise.future()).map(result -> result)
+                .recover(throwable -> internalServerError(throwable.getMessage()));
     }
 }
