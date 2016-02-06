@@ -82,3 +82,10 @@ footer a i {
 footer .lead hidden-xs {
 	color: #fff;
 }
+
+.under-development-banner {
+	background-color: #444;
+	color: #FFF;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
