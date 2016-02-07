@@ -19,10 +19,12 @@ public class LocalFilesystemStorage implements Storage {
     public LocalFilesystemStorage (Configuration configuration) {
         storagePath = Paths.get(configuration.getString("storage.local.path", "storage"));
 
-        if (!Files.exists(storagePath)) try {
-            Files.createDirectories(storagePath);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (configuration.getBoolean("storage.local.createPath", false)) {
+            if (!Files.exists(storagePath)) try {
+                Files.createDirectories(storagePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

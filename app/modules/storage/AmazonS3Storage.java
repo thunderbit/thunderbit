@@ -39,34 +39,35 @@ public class AmazonS3Storage implements Storage {
 
         AmazonS3 amazonS3 = new AmazonS3Client(credentials);
 
-        try {
-            if(!(amazonS3.doesBucketExist(bucketName))) {
-                amazonS3.createBucket(new CreateBucketRequest(bucketName));
+        if (configuration.getBoolean("storage.s3.createBucket", false)) {
+            try {
+                if (!(amazonS3.doesBucketExist(bucketName))) {
+                    amazonS3.createBucket(new CreateBucketRequest(bucketName));
+                }
+
+                String bucketLocation = amazonS3.getBucketLocation(new GetBucketLocationRequest(bucketName));
+                Logger.info("Amazon S3 bucket created at " + bucketLocation);
+            } catch (AmazonServiceException ase) {
+                Logger.error("Caught an AmazonServiceException, which " +
+                        "means your request made it " +
+                        "to Amazon S3, but was rejected with an error response " +
+                        "for some reason." +
+                        " Error Message: " + ase.getMessage() +
+                        " HTTP Status Code: " + ase.getStatusCode() +
+                        " AWS Error Code: " + ase.getErrorCode() +
+                        " Error Type: " + ase.getErrorType() +
+                        " Request ID: " + ase.getRequestId()
+                );
+            } catch (AmazonClientException ace) {
+                Logger.error("Caught an AmazonClientException, which " +
+                        "means the client encountered " +
+                        "an internal error while trying to " +
+                        "communicate with S3, " +
+                        "such as not being able to access the network." +
+                        " Error Message: " + ace.getMessage()
+                );
             }
-
-            String bucketLocation = amazonS3.getBucketLocation(new GetBucketLocationRequest(bucketName));
-            Logger.info("Amazon S3 bucket created at " + bucketLocation);
-        } catch (AmazonServiceException ase) {
-            Logger.error("Caught an AmazonServiceException, which " +
-                    "means your request made it " +
-                    "to Amazon S3, but was rejected with an error response " +
-                    "for some reason." +
-                    " Error Message: " + ase.getMessage() +
-                    " HTTP Status Code: " + ase.getStatusCode() +
-                    " AWS Error Code: " + ase.getErrorCode() +
-                    " Error Type: " + ase.getErrorType() +
-                    " Request ID: " + ase.getRequestId()
-            );
-        } catch (AmazonClientException ace) {
-            Logger.error("Caught an AmazonClientException, which " +
-                    "means the client encountered " +
-                    "an internal error while trying to " +
-                    "communicate with S3, " +
-                    "such as not being able to access the network." +
-                    " Error Message: " + ace.getMessage()
-            );
         }
-
     }
 
     @Override
