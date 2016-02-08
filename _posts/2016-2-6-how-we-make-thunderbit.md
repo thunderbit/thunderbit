@@ -9,7 +9,7 @@ Our source code is free [(as in freedom)](http://www.gnu.org/philosophy/philosop
 
 We test our code locally, and in the cloud via [Travis CI](https://travis-ci.org/thunderbit/thunderbit). This continuous integration tool is a neutral place to test our changes and avoid errors like the classic "It works on my computer".
 
-Last, but not least, we have [a running instance](http://thunderbit.heroku-app.com) of the application at [Heroku](https://heroku.com). This instance is connected to an [Amazon S3](http://aws.amazon.com/s3) bucket to store the uploaded files, and to a [MongoDB](http://mongodb.org) database at [MongoLab](http://mongolab.com).
+Last, but not least, we have [a running instance](http://thunderbit.herokuapp.com) of the application at [Heroku](https://heroku.com). This instance is connected to an [Amazon S3](http://aws.amazon.com/s3) bucket to store the uploaded files, and to a [MongoDB](http://mongodb.org) database at [MongoLab](http://mongolab.com).
 
 In short:
 
