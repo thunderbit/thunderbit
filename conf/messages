@@ -12,3 +12,4 @@ signIn=Sign in
 signOut=Sign out
 youHaveBeenLoggedOut=You've been logged out
 invalidUsernameOrPassword=Invalid user or password
+delete=Delete

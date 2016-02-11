@@ -62,8 +62,9 @@ public class LocalFilesystemStorageTest {
 
     @Test
     public void testFileIsDeleted () throws IOException {
-        Path testFile = Files.createFile(storagePath.resolve(UUID.randomUUID().toString()));
-        storage.delete(testFile.getFileName().toString()).get(500);
+        Path keyPath = Files.createDirectory(storagePath.resolve(UUID.randomUUID().toString()));
+        Path testFile = Files.createFile(keyPath.resolve(UUID.randomUUID().toString()));
+        storage.delete(keyPath.getFileName().toString(), testFile.getFileName().toString()).get(500);
         assertThat(Files.notExists(testFile), is(true));
     }
 

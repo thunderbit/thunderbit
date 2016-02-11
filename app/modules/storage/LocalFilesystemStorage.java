@@ -43,8 +43,9 @@ public class LocalFilesystemStorage implements Storage {
     }
 
     @Override
-    public F.Promise<Void> delete(String key) {
+    public F.Promise<Void> delete(String key, String name) {
         return F.Promise.promise(() -> {
+            Files.delete(storagePath.resolve(key).resolve(name));
             Files.delete(storagePath.resolve(key));
             return null;
         });

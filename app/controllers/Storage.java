@@ -8,6 +8,7 @@ import com.mongodb.async.client.MongoCollection;
 import models.Item;
 import modules.mongodb.MongoDB;
 import org.bson.types.ObjectId;
+import play.Logger;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -73,5 +74,28 @@ public class Storage extends Controller {
 
         return F.Promise.wrap(promise.future()).map(result -> result)
                 .recover(throwable -> internalServerError(throwable.getMessage()));
+    }
+
+    public F.Promise<Result> delete(String id) {
+        Promise<Item> promise = Futures.promise();
+
+        mongoDB.getDatabase().getCollection("items", Item.class)
+                .findOneAndDelete(eq("_id", new ObjectId(id)), (item, throwable) -> {
+                    if (throwable != null) {
+                        promise.failure(throwable);
+                    } else if (item == null) {
+                        promise.failure(new RuntimeException("Item " + id + " not found in the database"));
+                    } else {
+                        promise.success (item);
+                    }
+                });
+
+        return F.Promise.wrap(promise.future())
+                .flatMap(item -> storage.delete(item.storageKey, item.name))
+                .map(aVoid -> redirect(routes.Application.index()))
+                .recover(throwable -> {
+                    Logger.error("Error deleting " + id, throwable);
+                    return internalServerError();
+                });
     }
 }
