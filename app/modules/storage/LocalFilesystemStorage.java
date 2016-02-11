@@ -19,24 +19,27 @@ public class LocalFilesystemStorage implements Storage {
     public LocalFilesystemStorage (Configuration configuration) {
         storagePath = Paths.get(configuration.getString("storage.local.path", "storage"));
 
-        if (!Files.exists(storagePath)) try {
-            Files.createDirectories(storagePath);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (configuration.getBoolean("storage.local.createPath", false)) {
+            if (!Files.exists(storagePath)) try {
+                Files.createDirectories(storagePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
-    public F.Promise<Void> store(Path file, String key) {
+    public F.Promise<Void> store(Path file, String key, String name) {
         return F.Promise.promise(() -> {
-            Files.copy(file, storagePath.resolve(key));
+            Path keyPath = Files.createDirectory(storagePath.resolve(key));
+            Files.copy(file, keyPath.resolve(name));
             return null;
         });
     }
 
     @Override
     public F.Promise<Result> getDownload(String key, String name) {
-        return F.Promise.pure(ok(storagePath.resolve(key).toFile()));
+        return F.Promise.pure(ok(storagePath.resolve(key).resolve(name).toFile()));
     }
 
     @Override

@@ -13,8 +13,10 @@ public interface Storage {
      *          The file to store
      * @param   key
      *          A key for the stored file
+     * @param   name
+     *          A name for the stored file
      */
-    F.Promise<Void> store (Path file, String key);
+    F.Promise<Void> store (Path file, String key, String name);
 
     /**
      * Gets a download for a stored file

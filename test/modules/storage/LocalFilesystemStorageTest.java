@@ -1,5 +1,6 @@
 package modules.storage;
 
+import com.google.common.collect.ImmutableMap;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -11,6 +12,7 @@ import play.inject.guice.GuiceInjectorBuilder;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -25,10 +27,15 @@ public class LocalFilesystemStorageTest {
     @BeforeClass
     public static void beforeClass() {
         storagePath = Paths.get("storageTest");
+        Map<String, Object> configuration = ImmutableMap.of(
+                "storage.local.path", storagePath.toString(),
+                "storage.local.createPath", true
+        );
+
         injector = new GuiceInjectorBuilder()
                 .bindings(
                         bind(Storage.class).to(LocalFilesystemStorage.class),
-                        bind(Configuration.class).toInstance(new Configuration("storage.local.path="+storagePath.toString()))
+                        bind(Configuration.class).toInstance(new Configuration(configuration))
                 )
                 .build();
     }
@@ -48,8 +55,8 @@ public class LocalFilesystemStorageTest {
     public void testFileIsStored () throws IOException {
         String id = UUID.randomUUID().toString();
         Path testFile = Files.createTempFile("testFile", "temp");
-        storage.store(testFile, id).get(500);
-        Path storedTestFile = storagePath.resolve(id);
+        storage.store(testFile, id, testFile.toFile().getName()).get(500);
+        Path storedTestFile = storagePath.resolve(id).resolve(testFile.toFile().getName());
         assertThat(Files.exists(storedTestFile), is(true));
     }
 
