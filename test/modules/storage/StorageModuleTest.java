@@ -6,6 +6,7 @@ import play.inject.guice.GuiceApplicationBuilder;
 import play.test.WithApplication;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static play.test.Helpers.running;
 
@@ -17,7 +18,9 @@ public class StorageModuleTest extends WithApplication {
                 .build();
 
         running (application, () -> {
-            assertThat("LocalFilesystemStorage has not been mapped", application.injector().instanceOf(Storage.class) instanceof LocalFilesystemStorage, is(true));
+            Storage instance = application.injector().instanceOf(Storage.class);
+            assertThat("Storage has not been mapped", instance, notNullValue());
+            assertThat("Storage has been mapped to a wrong type", instance instanceof LocalFilesystemStorage, is(true));
         });
     }
 
@@ -30,7 +33,9 @@ public class StorageModuleTest extends WithApplication {
                 .build();
 
         running (application, () -> {
-            assertThat("AmazonS3Storage has not been mapped", application.injector().instanceOf(Storage.class) instanceof AmazonS3Storage, is(true));
+            Storage instance = application.injector().instanceOf(Storage.class);
+            assertThat("Storage has not been mapped", instance, notNullValue());
+            assertThat("Storage has been mapped to a wrong type", instance instanceof AmazonS3Storage, is(true));
         });
     }
 }
