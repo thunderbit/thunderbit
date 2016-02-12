@@ -18,6 +18,11 @@ header #logo {
     padding: 3px;
 }
 
+#blog_header #logo_holder {
+	background: url("../images/logo-wb.png") left top 15px / 42px 75px no-repeat;
+	padding-left: 53px;
+}
+
 body > header h1 {
 	font-size: 72px;
 }
