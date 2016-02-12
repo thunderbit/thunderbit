@@ -7,6 +7,12 @@ body > header {
 	height:575px;
 }
 
+header #logo {
+	width: inherit;
+	height: 173px;
+	background: url("../images/logo-wb.png") center no-repeat;
+}
+
 #blog_header {
     height:auto;
     padding: 3px;
@@ -22,7 +28,7 @@ header h1 a, header h1 a:hover, header h1 a:focus, header h2 a, header h2 a:hove
 }
 
 header .container {
-	margin-top: 173px;
+	margin-top: 0px;
 }
 
 #blog_header .container {
