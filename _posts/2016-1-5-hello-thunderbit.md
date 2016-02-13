@@ -1,7 +1,7 @@
 ---
 title: Hello Thunderbit!
 ---
-Llevamos ya un mes y algo trabajando en el proyecto Thunderbit, sin embargo no podemos decir que hemos realmente comenzado que expliquemos qué es lo que estamos haciendo, y por qué lo hacemos. No tiene gracia trabajar en un proyecto de software libre sin decirle a nadie, ¿verdad?
+Llevamos ya un mes y algo trabajando en el proyecto Thunderbit, sin embargo no podemos decir que hemos realmente comenzado sin que expliquemos qué es lo que estamos haciendo, y por qué lo hacemos. No tiene gracia trabajar en un proyecto de software libre sin decirle a nadie, ¿verdad?
 
 **¿Quiénes somos?**
 
@@ -29,4 +29,4 @@ Tras realizar un análisis no exhaustivo de los principales sistemas de gestión
 
 ¡Exacto! Bueno, no tan literalmente, pero ese es el espíritu. En los próximos meses estaremos investigando sobre todo lo necesario para implementar nuestra idea, programando, haciendo pruebas, y por supuesto compartiendo cada avance. Para cuando acabe el certamen, en mayo, debemos tener una aplicación funcional lista para su uso en producción.
 
-¿Te gusta cómo suena? Pues mantente al tanto de los nuevos posts en el blog y síguenos [@thunderbitdev](http://twitter.com/thunderbitdev). En próximos posts daremos detalles de cómo estamos llevando el desarrollo del proyecto.
+¿Te gusta cómo suena? Pues mantente al tanto de los nuevos posts en el blog y síguenos en [@thunderbitdev](http://twitter.com/thunderbitdev). En próximos posts daremos detalles de cómo estamos llevando el desarrollo del proyecto.
