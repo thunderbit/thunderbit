@@ -1,18 +1,4 @@
 
-body > header {
-	background: #ffffff url("../images/top_back.jpg") top center fixed no-repeat;
-	background-color: rgba(0,0,0,0.4);
-	color: #FFFFFF;
-	padding: 35px;
-	height:575px;
-}
-
-header #logo {
-	width: inherit;
-	height: 173px;
-	background: url("../images/logo-wb.png") center no-repeat;
-}
-
 #competition-banner {
 	padding-top: 1px;
 	height: 25px;
@@ -38,14 +24,18 @@ header #logo {
 	text-decoration: none;
 }
 
-#blog_header {
-    height:auto;
-    padding: 3px;
+body > header {
+	background: #ffffff url("../images/top_back.jpg") top center fixed no-repeat;
+	background-color: rgba(0,0,0,0.4);
+	color: #FFFFFF;
+	padding: 35px;
+	height:575px;
 }
 
-#blog_header #logo_holder {
-	background: url("../images/logo-wb.png") left top 15px / 42px 75px no-repeat;
-	padding-left: 53px;
+header #logo {
+	width: inherit;
+	height: 173px;
+	background: url("../images/logo-wb.png") center no-repeat;
 }
 
 body > header h1 {
@@ -61,6 +51,12 @@ header .container {
 	margin-top: 0px;
 }
 
+@media (max-width:768px) {
+	body > header h1 {
+		font-size: 42px;
+	}
+}
+
 #blog_header .container {
     margin-top: 0px;
 }
@@ -73,22 +69,14 @@ header .container {
     font-size: 1.1em;
 }
 
-
-
-@media (max-width:768px) {
-	body > header h1 {
-		font-size: 42px;
-	}
+#blog_header {
+    height:auto;
+    padding: 3px;
 }
 
-#features-container {
-	background-color: #E5ECF2;
-	padding-top: 30px;
-	padding-bottom: 25px;
-}
-
-#features-container header {
-	margin-bottom: 35px;
+#blog_header #logo_holder {
+	background: url("../images/logo-wb.png") left top 15px / 42px 75px no-repeat;
+	padding-left: 53px;
 }
 
 .social-buttons {
@@ -108,6 +96,34 @@ header .container {
 	margin: 0px;
 	padding: 0px 20px 10px 20px;
 	transition:all .1s ease-in-out;
+}
+
+#features-container {
+	background-color: #E5ECF2;
+	padding-top: 30px;
+	padding-bottom: 25px;
+}
+
+#features-container header {
+	margin-bottom: 35px;
+}
+
+.under-development-banner {
+	background-color: #444;
+	color: #FFF;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+  color: green;
+  background-color: white;
+  border-color: green;
+  -webkit-transition: all 0.15s;
+     -moz-transition: all 0.15s;
+          transition: all 0.15s;
 }
 
 #posts-container {
@@ -136,22 +152,4 @@ footer a i {
 
 footer .lead hidden-xs {
 	color: #fff;
-}
-
-.under-development-banner {
-	background-color: #444;
-	color: #FFF;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-.btn:hover,
-.btn:focus,
-.btn:active {
-  color: green;
-  background-color: white;
-  border-color: green;
-  -webkit-transition: all 0.15s;
-     -moz-transition: all 0.15s;
-          transition: all 0.15s;
 }
