@@ -6,4 +6,4 @@ A web application to manage digital assets, with a big emphasis on tagging.
 
 Find more at [the project's website](http://thunderbit.github.io/thunderbit/)
 
-Wan to collaborate? Join us on [Taiga](https://tree.taiga.io/project/greenled-thunderbit-1/)
+Wan to collaborate? Join us on [Taiga](https://tree.taiga.io/project/thunderbit/)
