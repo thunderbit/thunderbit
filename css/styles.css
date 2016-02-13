@@ -13,6 +13,31 @@ header #logo {
 	background: url("../images/logo-wb.png") center no-repeat;
 }
 
+#competition-banner {
+	padding-top: 1px;
+	height: 25px;
+	width: 100%;
+	background-color: #333;
+	position:fixed;
+	top:0px;
+	left: 0px;
+	z-index: 1000;
+	border-bottom: 1px solid #100f14;
+}
+
+#competition-banner > p {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#competition-banner p, #competition-banner a {
+	color: #9a848c;
+}
+#competition-banner a:hover {
+	color: #e7dfec;
+	text-decoration: none;
+}
+
 #blog_header {
     height:auto;
     padding: 3px;
