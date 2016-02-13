@@ -144,3 +144,14 @@ footer .lead hidden-xs {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+  color: green;
+  background-color: white;
+  border-color: green;
+  -webkit-transition: all 0.15s;
+     -moz-transition: all 0.15s;
+          transition: all 0.15s;
+}
