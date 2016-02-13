@@ -145,10 +145,15 @@ footer a {
 footer a:hover {
 	color: #fff;
 	text-decoration: none;
+	color: red;
 }
 
 footer a i {
 	color: red;
+}
+
+footer a i:hover {
+	color: #fff;
 }
 
 footer .lead hidden-xs {
