@@ -8,6 +8,7 @@ import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import views.html.error;
 import views.html.uploadForm;
 import views.html.uploadResult;
 
@@ -41,9 +42,9 @@ public class Storage extends Controller {
                             // If the database entity save is successful returns a 200 Result
                             .map((F.Function<Item, Result>) item -> ok(uploadResult.render(item.name)))
                             // If the database entity save is not successful returns a 500 Result
-                            .recover(throwable -> internalServerError(throwable.getMessage()))
+                            .recover(throwable -> internalServerError(error.render()))
                     // If the file storage fails returns a 500 Result
-                    .recover(throwable -> internalServerError(throwable.getMessage())));
+                    .recover(throwable -> internalServerError(error.render())));
         } else {
             return F.Promise.pure(badRequest());
         }
@@ -60,11 +61,11 @@ public class Storage extends Controller {
                         // Returns a promise of retrieving a download URL for the stored file
                         return storage.getDownload(item.storageKey, item.name)
                                 // If an error occurs when retrieving the download URL returns a 500 Result
-                                .recover(throwable -> internalServerError(throwable.getMessage()));
+                                .recover(throwable -> internalServerError(error.render()));
                     }
                 })
                 // If an error occurs when retrieving the item returns a 500 Result
-                .recover(throwable -> internalServerError(throwable.getMessage()));
+                .recover(throwable -> internalServerError(error.render()));
     }
 
     public F.Promise<Result> delete(String id) {
@@ -79,10 +80,10 @@ public class Storage extends Controller {
                         return storage.delete(item.storageKey, item.name)
                                 .map(aVoid -> redirect(routes.Application.index()))
                                 // If an error occurs when retrieving the item returns a 500 Result
-                                .recover(throwable -> internalServerError(throwable.getMessage()));
+                                .recover(throwable -> internalServerError(error.render()));
                     }
                 })
                 // If an error occurs when retrieving the item returns a 500 Result
-                .recover(throwable -> internalServerError(throwable.getMessage()));
+                .recover(throwable -> internalServerError(error.render()));
     }
 }

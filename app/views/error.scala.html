@@ -1,0 +1,14 @@
+@import play.i18n._
+
+@main(Messages.get("error")) {
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <div class="jumbotron text-center">
+                    <h1>@Messages.get("somethingWentWrong")</h1>
+                    <p><a href="@routes.Application.index()">@Messages.get("takeMeOutOfHere")</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

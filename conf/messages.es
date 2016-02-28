@@ -13,3 +13,5 @@ signOut=Salir
 youHaveBeenLoggedOut=Has salido
 invalidUsernameOrPassword=Nombre de usuario o contraseña incorrectos
 delete=Eliminar
+somethingWentWrong=Oops! Algo ha salido mal
+takeMeOutOfHere=Sácame de aquí
