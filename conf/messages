@@ -1,9 +1,6 @@
 uploadFile=Upload file
 fileUploaded=File uploaded
 upload=Upload
-youHaveUploadedTheFile=You have uploaded the file {0}
-uploadAnother=Upload another
-home=Home
 pleaseSignIn=Please sign in
 userName=User name
 password=Password
@@ -14,3 +11,5 @@ invalidUsernameOrPassword=Invalid user or password
 delete=Delete
 somethingWentWrong=Oops! Someting went wrong
 takeMeOutOfHere=Take me out of here
+close=Close
+cancel=Cancel

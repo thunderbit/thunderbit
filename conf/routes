@@ -4,7 +4,6 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-GET     /upload                     controllers.Storage.uploadForm()
 POST    /upload                     controllers.Storage.upload()
 GET     /download/:id               controllers.Storage.download(id: String)
 POST    /delete/:id                 controllers.Storage.delete(id: String)

@@ -2,15 +2,12 @@ package controllers;
 
 import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.google.inject.Inject;
-import models.Item;
 import modules.services.api.IItemsService;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import views.html.error;
-import views.html.uploadForm;
-import views.html.uploadResult;
 
 import java.util.UUID;
 
@@ -20,11 +17,6 @@ public class Storage extends Controller {
 
     @Inject
     public IItemsService itemsService;
-
-    @SubjectPresent
-    public Result uploadForm() {
-        return ok(uploadForm.render());
-    }
 
     @SubjectPresent
     public F.Promise<Result> upload() {
@@ -40,7 +32,7 @@ public class Storage extends Controller {
                     // If the file storage is successful returns a promise of the database entity save
                     .flatMap(aVoid -> itemsService.create(fileName, uuid)
                             // If the database entity save is successful returns a 200 Result
-                            .map((F.Function<Item, Result>) item -> ok(uploadResult.render(item.name)))
+                            .map(item -> redirect(routes.Application.index()))
                             // If the database entity save is not successful returns a 500 Result
                             .recover(throwable -> internalServerError(error.render()))
                     // If the file storage fails returns a 500 Result
