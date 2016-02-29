@@ -18,6 +18,7 @@ import play.Logger;
 import play.libs.F;
 import play.mvc.Result;
 import scala.concurrent.Promise;
+import views.html.error;
 
 import java.net.URL;
 import java.nio.file.Path;
@@ -26,6 +27,8 @@ import static play.mvc.Results.internalServerError;
 import static play.mvc.Results.redirect;
 
 public class AmazonS3Storage implements Storage {
+    private static final Logger.ALogger logger = Logger.of(AmazonS3Storage.class);
+
     private final AWSCredentials credentials;
     private final String bucketName;
 
@@ -46,26 +49,11 @@ public class AmazonS3Storage implements Storage {
                 }
 
                 String bucketLocation = amazonS3.getBucketLocation(new GetBucketLocationRequest(bucketName));
-                Logger.info("Amazon S3 bucket created at " + bucketLocation);
+                logger.info("Amazon S3 bucket created at " + bucketLocation);
             } catch (AmazonServiceException ase) {
-                Logger.error("Caught an AmazonServiceException, which " +
-                        "means your request made it " +
-                        "to Amazon S3, but was rejected with an error response " +
-                        "for some reason." +
-                        " Error Message: " + ase.getMessage() +
-                        " HTTP Status Code: " + ase.getStatusCode() +
-                        " AWS Error Code: " + ase.getErrorCode() +
-                        " Error Type: " + ase.getErrorType() +
-                        " Request ID: " + ase.getRequestId()
-                );
+                logAmazonServiceException (ase);
             } catch (AmazonClientException ace) {
-                Logger.error("Caught an AmazonClientException, which " +
-                        "means the client encountered " +
-                        "an internal error while trying to " +
-                        "communicate with S3, " +
-                        "such as not being able to access the network." +
-                        " Error Message: " + ace.getMessage()
-                );
+                logAmazonClientException(ace);
             }
         }
     }
@@ -75,19 +63,25 @@ public class AmazonS3Storage implements Storage {
         Promise<Void> promise = Futures.promise();
 
         TransferManager transferManager = new TransferManager(credentials);
-        Upload upload = transferManager.upload(bucketName, key, path.toFile());
-
-        upload.addProgressListener((ProgressListener) progressEvent -> {
-            if (progressEvent.getEventType().isTransferEvent()) {
-                if (progressEvent.getEventType().equals(ProgressEventType.TRANSFER_COMPLETED_EVENT)) {
-                    transferManager.shutdownNow();
-                    promise.success(null);
-                } else if (progressEvent.getEventType().equals(ProgressEventType.TRANSFER_FAILED_EVENT)) {
-                    transferManager.shutdownNow();
-                    promise.failure(new Exception("Upload failed"));
+        try {
+            Upload upload = transferManager.upload(bucketName, key, path.toFile());
+            upload.addProgressListener((ProgressListener) progressEvent -> {
+                if (progressEvent.getEventType().isTransferEvent()) {
+                    if (progressEvent.getEventType().equals(ProgressEventType.TRANSFER_COMPLETED_EVENT)) {
+                        transferManager.shutdownNow();
+                        promise.success(null);
+                    } else if (progressEvent.getEventType().equals(ProgressEventType.TRANSFER_FAILED_EVENT)) {
+                        transferManager.shutdownNow();
+                        logger.error(progressEvent.toString());
+                        promise.failure(new Exception(progressEvent.toString()));
+                    }
                 }
-            }
-        });
+            });
+        } catch (AmazonServiceException ase) {
+            logAmazonServiceException (ase);
+        } catch (AmazonClientException ace) {
+            logAmazonClientException(ace);
+        }
 
         return F.Promise.wrap(promise.future());
     }
@@ -106,14 +100,8 @@ public class AmazonS3Storage implements Storage {
 
             return F.Promise.pure(redirect(url.toString()));
         } catch (AmazonClientException ace) {
-            Logger.error("Caught an AmazonClientException, which " +
-                    "means the client encountered " +
-                    "an internal error while trying to " +
-                    "communicate with S3, " +
-                    "such as not being able to access the network." +
-                    " Error Message: " + ace.getMessage()
-            );
-            return F.Promise.pure(internalServerError("Download failed"));
+            logAmazonClientException (ace);
+            return F.Promise.pure(internalServerError(error.render()));
         }
     }
 
@@ -128,12 +116,41 @@ public class AmazonS3Storage implements Storage {
                 if (progressEvent.getEventType().equals(ProgressEventType.TRANSFER_COMPLETED_EVENT)) {
                     promise.success(null);
                 } else if (progressEvent.getEventType().equals(ProgressEventType.TRANSFER_FAILED_EVENT)) {
-                    promise.failure(new Exception("Delete failed"));
+                    logger.error(progressEvent.toString());
+                    promise.failure(new Exception(progressEvent.toString()));
                 }
             }
         });
-        amazonS3.deleteObject(request);
+
+        try {
+            amazonS3.deleteObject(request);
+        } catch (AmazonServiceException ase) {
+            logAmazonServiceException (ase);
+        } catch (AmazonClientException ace) {
+            logAmazonClientException(ace);
+        }
 
         return F.Promise.wrap(promise.future());
+    }
+
+    private void logAmazonServiceException (AmazonServiceException ase) {
+        logger.error("Caught an AmazonServiceException, which " +
+                "means your request made it " +
+                "to Amazon S3, but was rejected with an error response " +
+                "for some reason." +
+                " Error Message: " + ase.getMessage() +
+                " HTTP Status Code: " + ase.getStatusCode() +
+                " AWS Error Code: " + ase.getErrorCode() +
+                " Error Type: " + ase.getErrorType() +
+                " Request ID: " + ase.getRequestId(), ase);
+    }
+
+    private void logAmazonClientException (AmazonClientException ace) {
+        logger.error("Caught an AmazonClientException, which " +
+                "means the client encountered " +
+                "an internal error while trying to " +
+                "communicate with S3, " +
+                "such as not being able to access the network." +
+                " Error Message: " + ace.getMessage(), ace);
     }
 }
