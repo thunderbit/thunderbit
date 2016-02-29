@@ -23,6 +23,7 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies += "junit" % "junit" % "4.11" % Test
+libraryDependencies += "org.mongodb" % "mongodb-driver" % "3.2.0" % Test
 
 // Play provides two styles of routers, one expects its actions to be injected, the
 // other, legacy style, accesses its actions statically.
