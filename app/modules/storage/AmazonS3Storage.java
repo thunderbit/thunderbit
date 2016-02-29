@@ -34,7 +34,7 @@ public class AmazonS3Storage implements Storage {
 
     @Inject
     public AmazonS3Storage (Configuration configuration) {
-        bucketName = configuration.getString("storage.s3.bucket");
+        bucketName = configuration.getString("storage.s3.bucket", "thunderbit");
 
         String accessKey = configuration.getString("storage.s3.accesskey");
         String secretKey = configuration.getString("storage.s3.secretkey");
@@ -42,7 +42,7 @@ public class AmazonS3Storage implements Storage {
 
         AmazonS3 amazonS3 = new AmazonS3Client(credentials);
 
-        if (configuration.getBoolean("storage.s3.createBucket", false)) {
+        if (configuration.getBoolean("storage.s3.createBucket", true)) {
             try {
                 if (!(amazonS3.doesBucketExist(bucketName))) {
                     amazonS3.createBucket(new CreateBucketRequest(bucketName));
