@@ -7,32 +7,34 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            @subjectPresent() {
-                                <th></th>
-                            }
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for(item <- items) {
+                @if(!items.isEmpty()) {
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>
-                                    <a href="@routes.Storage.download(item.id)">@item.name</a>
-                                </td>
+                                <th></th>
                                 @subjectPresent() {
-                                <td>
-                                    @helper.form(routes.Storage.delete(item.id)) {
-                                    <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> @Messages.get("delete")</button>
-                                    }
-                                </td>
+                                    <th></th>
                                 }
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @for(item <- items) {
+                                <tr>
+                                    <td>
+                                        <a href="@routes.Storage.download(item.id)">@item.name</a>
+                                    </td>
+                                    @subjectPresent() {
+                                    <td>
+                                        @helper.form(routes.Storage.delete(item.id)) {
+                                        <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> @Messages.get("delete")</button>
+                                        }
+                                    </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
 
                 @subjectPresent() {
                     <a href="@routes.Storage.uploadForm()" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> @Messages.get("uploadFile")</a>
