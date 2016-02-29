@@ -1,4 +1,3 @@
-underDevelopment=Aplicación en desarrollo
 uploadFile=Agregar fichero
 fileUploaded=Fichero agregado
 upload=Agregar
