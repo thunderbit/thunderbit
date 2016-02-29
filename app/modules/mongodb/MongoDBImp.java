@@ -22,7 +22,7 @@ public class MongoDBImp implements MongoDB {
 
     @Inject
     public MongoDBImp(Configuration configuration, ApplicationLifecycle lifecycle) {
-        ConnectionString connectionString = new ConnectionString(configuration.getString("mongodb.uri", "mongodb://127.0.0.1:27017/test"));
+        ConnectionString connectionString = new ConnectionString(configuration.getString("mongodb.uri", "mongodb://127.0.0.1:27017/thunderbit"));
         mongoClient = MongoClients.create(connectionString);
 
         CodecRegistry codecRegistry = CodecRegistries.fromRegistries(
