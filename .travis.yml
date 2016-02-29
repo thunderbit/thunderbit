@@ -6,6 +6,12 @@ jdk:
 scala:
   - 2.11.6
 
+services:
+  - mongodb
+
+before_script:
+  - sleep 15
+
 script:
   - sbt test
 
