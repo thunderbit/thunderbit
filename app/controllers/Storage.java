@@ -1,32 +1,24 @@
 package controllers;
 
-import akka.dispatch.Futures;
 import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.google.inject.Inject;
-import com.mongodb.async.client.FindIterable;
-import com.mongodb.async.client.MongoCollection;
 import models.Item;
-import modules.mongodb.MongoDB;
-import org.bson.types.ObjectId;
-import play.Logger;
+import modules.services.api.IItemsService;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import scala.concurrent.Promise;
 import views.html.uploadForm;
 import views.html.uploadResult;
 
 import java.util.UUID;
-
-import static com.mongodb.client.model.Filters.eq;
 
 public class Storage extends Controller {
     @Inject
     public modules.storage.Storage storage;
 
     @Inject
-    public MongoDB mongoDB;
+    public IItemsService itemsService;
 
     @SubjectPresent
     public Result uploadForm() {
@@ -42,60 +34,55 @@ public class Storage extends Controller {
             String fileName = file.getFilename();
             String uuid = UUID.randomUUID().toString();
 
-            F.Promise<Void> storagePromise = storage.store(file.getFile().toPath(), uuid, file.getFilename());
-
-            return storagePromise.flatMap(aVoid -> {
-                Item item = new Item();
-                item.name = fileName;
-                item.storageKey = uuid;
-
-                Promise<Void> databaseScalaPromise = Futures.promise();
-
-                MongoCollection<Item> items = mongoDB.getDatabase().getCollection("items", Item.class);
-                items.insertOne(item, (anotherVoid, throwable) -> databaseScalaPromise.success(anotherVoid));
-
-                return F.Promise.wrap(databaseScalaPromise.future())
-                        .map((F.Function<Void, Result>) anotherVoid -> ok(uploadResult.render(fileName)))
-                        .recover(throwable -> internalServerError(throwable.getMessage()));
-            }).recover(throwable -> internalServerError(throwable.getMessage()));
+            // Returns a promise of storing the the file
+            return storage.store(file.getFile().toPath(), uuid, file.getFilename())
+                    // If the file storage is successful returns a promise of the database entity save
+                    .flatMap(aVoid -> itemsService.create(fileName, uuid)
+                            // If the database entity save is successful returns a 200 Result
+                            .map((F.Function<Item, Result>) item -> ok(uploadResult.render(item.name)))
+                            // If the database entity save is not successful returns a 500 Result
+                            .recover(throwable -> internalServerError(throwable.getMessage()))
+                    // If the file storage fails returns a 500 Result
+                    .recover(throwable -> internalServerError(throwable.getMessage())));
         } else {
             return F.Promise.pure(badRequest());
         }
     }
 
     public F.Promise<Result> download(String id) {
-        Promise<Result> promise = Futures.promise();
-
-        FindIterable<Item> itemsIterable = mongoDB.getDatabase().getCollection("items", Item.class)
-                .find().filter(eq("_id", new ObjectId(id)));
-
-        itemsIterable.first((item, throwable) ->
-                storage.getDownload(item.storageKey, item.name).map(promise::success));
-
-        return F.Promise.wrap(promise.future()).map(result -> result)
+        // Returns a promise of retrieving an item from the database
+        return itemsService.read(id)
+                .flatMap(item -> {
+                    if (item == null) {
+                        // If there is no item with the provided id returns a 404 Result
+                        return F.Promise.pure(notFound());
+                    } else {
+                        // Returns a promise of retrieving a download URL for the stored file
+                        return storage.getDownload(item.storageKey, item.name)
+                                // If an error occurs when retrieving the download URL returns a 500 Result
+                                .recover(throwable -> internalServerError(throwable.getMessage()));
+                    }
+                })
+                // If an error occurs when retrieving the item returns a 500 Result
                 .recover(throwable -> internalServerError(throwable.getMessage()));
     }
 
     public F.Promise<Result> delete(String id) {
-        Promise<Item> promise = Futures.promise();
-
-        mongoDB.getDatabase().getCollection("items", Item.class)
-                .findOneAndDelete(eq("_id", new ObjectId(id)), (item, throwable) -> {
-                    if (throwable != null) {
-                        promise.failure(throwable);
-                    } else if (item == null) {
-                        promise.failure(new RuntimeException("Item " + id + " not found in the database"));
+        // Returns a promise of deleting an item from the database
+        return itemsService.delete(id)
+                .flatMap(item -> {
+                    if (item == null) {
+                        // If there is no item with the provided id returns a 404 Result
+                        return F.Promise.pure(notFound());
                     } else {
-                        promise.success (item);
+                        // Returns a promise of deleting the stored file
+                        return storage.delete(item.storageKey, item.name)
+                                .map(aVoid -> redirect(routes.Application.index()))
+                                // If an error occurs when retrieving the item returns a 500 Result
+                                .recover(throwable -> internalServerError(throwable.getMessage()));
                     }
-                });
-
-        return F.Promise.wrap(promise.future())
-                .flatMap(item -> storage.delete(item.storageKey, item.name))
-                .map(aVoid -> redirect(routes.Application.index()))
-                .recover(throwable -> {
-                    Logger.error("Error deleting " + id, throwable);
-                    return internalServerError();
-                });
+                })
+                // If an error occurs when retrieving the item returns a 500 Result
+                .recover(throwable -> internalServerError(throwable.getMessage()));
     }
 }
