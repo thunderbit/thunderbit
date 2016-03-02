@@ -35,38 +35,7 @@
                         </tbody>
                     </table>
                 }
-
-                @subjectPresent() {
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target=".upload-file-modal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> @Messages.get("uploadFile")</button>
-                }
             </div>
         </div>
     </div>
-
-    @subjectPresent() {
-        <div class="modal fade upload-file-modal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    @helper.form(action = routes.Storage.upload, 'enctype -> "multipart/form-data", 'class -> "form-horizontal") {
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="@Messages.get("close")"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="uploadFileModalLabel">@Messages.get("uploadFile")</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="file" class="col-sm-2 control-label">Fichero</label>
-                            <div class="col-sm-10">
-                                <input type="file" name="file" id="file">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> @Messages.get("upload")</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> @Messages.get("cancel")</button>
-                    </div>
-                    }
-                </div>
-            </div>
-        </div>
-    }
 }
