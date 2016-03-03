@@ -6,7 +6,10 @@
 GET     /                           controllers.Application.index()
 POST    /upload                     controllers.Storage.upload()
 GET     /download/:id               controllers.Storage.download(id: String)
-POST    /delete/:id                 controllers.Storage.delete(id: String)
+
+# Items
+DELETE  /items/:id                  controllers.Items.delete(id)
+GET     /items                      controllers.Items.list()
 
 GET     /login                      controllers.Authentication.login
 POST    /login                      controllers.Authentication.doLogin
