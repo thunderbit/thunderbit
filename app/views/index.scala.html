@@ -1,72 +1,129 @@
-@(items: List[Item])
-
 @import play.i18n._
 @import be.objectify.deadbolt.java.views.html.subjectPresent
 
-@main("Welcome to Play") {
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                @if(!items.isEmpty()) {
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                @subjectPresent() {
-                                    <th></th>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for(item <- items) {
-                                <tr>
-                                    <td>
-                                        <a href="@routes.Storage.download(item.id)">@item.name</a>
-                                    </td>
-                                    @subjectPresent() {
-                                    <td>
-                                        @helper.form(routes.Storage.delete(item.id)) {
-                                        <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> @Messages.get("delete")</button>
-                                        }
-                                    </td>
-                                    }
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                }
+@templates = {
+<script type="text/template" id="item-template">
+    <td>
+        <a href="download/<%- id %>"><%- name %></a>
+    </td>
+    @subjectPresent() {
+    <td>
+        <button type="button" class="btn btn-danger btn-xs delete-btn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> @Messages.get("delete")</button>
+    </td>
+    }
+</script>
+<script type="text/template" id="alert-template">
+    <div class="alert alert-<%- type %> alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <p><%- message %></p>
+    </div>
+</script>
+}
 
-                @subjectPresent() {
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target=".upload-file-modal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> @Messages.get("uploadFile")</button>
+@scripts = {
+<script src="@routes.WebJarAssets.at(WebJarAssets.locate("underscore-min.js"))"></script>
+<script src="@routes.WebJarAssets.at(WebJarAssets.locate("backbone-min.js"))"></script>
+<script src="@routes.Assets.versioned("javascripts/models/item.js")"></script>
+<script src="@routes.Assets.versioned("javascripts/collections/items.js")"></script>
+<script src="@routes.Assets.versioned("javascripts/views/item-view.js")"></script>
+<script src="@routes.Assets.versioned("javascripts/views/app-view.js")"></script>
+<script src="@routes.Assets.versioned("javascripts/app.js")"></script>
+
+<script type="text/javascript">
+// Prepares upload modal to a new download
+function resetUploadModal () {
+    $('.upload-file-modal .upload-btn').button('reset');
+    $('.upload-file-modal .cancel-btn').show();
+    $('.upload-progress').hide();
+    updateUploadProgressBarValue(0);
+}
+
+// Updates the progress value of the upload progress bar
+function updateUploadProgressBarValue (percent) {
+    $('.upload-progress .progress-bar').css('width', percent + '%');
+    $('.upload-progress .progress-bar .sr-only').html(percent + "% @Messages.get("completed")");
+}
+
+$(document).ready(function(){
+    resetUploadModal();
+
+    $('.upload-file-modal .upload-btn').click(function(){
+        // Get the data from the upload form
+        var formData = new FormData($('.upload-form')[0]);
+
+        // Send upload form data trough Ajax (http://stackoverflow.com/questions/166221/how-can-i-upload-files-asynchronously)
+        $.ajax({
+            url: '@routes.Storage.upload',  //Server script to process data
+            type: 'POST',
+
+            // Custom XMLHttpRequest
+            xhr: function() {
+                var myXhr = $.ajaxSettings.xhr();
+                // Check if upload property exists
+                if(myXhr.upload){
+                    // For handling the progress of the upload
+                    myXhr.upload.addEventListener('progress',progressHandler, false);
                 }
-            </div>
+                return myXhr;
+            },
+
+            //Ajax events
+            success: completeHandler,
+            error: errorHandler,
+
+            // Form data
+            data: formData,
+
+            //Options to tell jQuery not to process data or worry about content-type.
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+
+        $('.upload-file-modal .cancel-btn').hide();
+        $('.upload-progress').show();
+        $('.upload-file-modal .upload-btn').button('uploading');
+
+        function progressHandler(e){
+            if(e.lengthComputable){
+                updateUploadProgressBarValue (e.loaded / e.total * 100);
+            }
+        }
+
+        function completeHandler(){
+            $('.upload-file-modal').modal('hide');
+            resetUploadModal();
+            app.items.fetch({reset: true});
+        }
+
+        function errorHandler(data){
+            $('.upload-file-modal .alert').remove();
+            var template = _.template($('#alert-template').html());
+            $('.upload-file-modal .modal-body').prepend(template({type: "danger", message: "@Messages.get("uploadError")"}));
+            resetUploadModal();
+        }
+    });
+});
+</script>
+}
+
+@main("Welcome to Play", null, scripts, templates) {
+<div class="container thunderbit-app">
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        @subjectPresent() {
+                            <th></th>
+                        }
+                    </tr>
+                </thead>
+                <tbody class="table items-container">
+                </tbody>
+            </table>
         </div>
     </div>
-
-    @subjectPresent() {
-        <div class="modal fade upload-file-modal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    @helper.form(action = routes.Storage.upload, 'enctype -> "multipart/form-data", 'class -> "form-horizontal") {
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="@Messages.get("close")"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="uploadFileModalLabel">@Messages.get("uploadFile")</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="file" class="col-sm-2 control-label">Fichero</label>
-                            <div class="col-sm-10">
-                                <input type="file" name="file" id="file">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> @Messages.get("upload")</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> @Messages.get("cancel")</button>
-                    </div>
-                    }
-                </div>
-            </div>
-        </div>
-    }
+</div>
 }

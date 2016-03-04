@@ -13,3 +13,6 @@ somethingWentWrong=Oops! Someting went wrong
 takeMeOutOfHere=Take me out of here
 close=Close
 cancel=Cancel
+uploading=Uploading
+uploadError=Oops...an error occurred when uploading your file
+complete=Complete

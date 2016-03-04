@@ -59,23 +59,4 @@ public class Storage extends Controller {
                 // If an error occurs when retrieving the item returns a 500 Result
                 .recover(throwable -> internalServerError(error.render()));
     }
-
-    public F.Promise<Result> delete(String id) {
-        // Returns a promise of deleting an item from the database
-        return itemsService.delete(id)
-                .flatMap(item -> {
-                    if (item == null) {
-                        // If there is no item with the provided id returns a 404 Result
-                        return F.Promise.pure(notFound());
-                    } else {
-                        // Returns a promise of deleting the stored file
-                        return storage.delete(item.storageKey, item.name)
-                                .map(aVoid -> redirect(routes.Application.index()))
-                                // If an error occurs when retrieving the item returns a 500 Result
-                                .recover(throwable -> internalServerError(error.render()));
-                    }
-                })
-                // If an error occurs when retrieving the item returns a 500 Result
-                .recover(throwable -> internalServerError(error.render()));
-    }
 }

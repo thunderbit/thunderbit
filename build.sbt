@@ -19,6 +19,9 @@ libraryDependencies ++= Seq(
   "org.webjars" % "requirejs" % "2.1.22",
   "org.webjars" % "jquery" % "1.11.1",
   "org.webjars" % "bootstrap" % "3.3.6",
+  "org.webjars" % "backbonejs" % "1.2.3",
+  "org.webjars" % "underscorejs" % "1.8.3",
+  "net.sf.flexjson" % "flexjson" % "3.3",
   "be.objectify" %% "deadbolt-java" % "2.4.4"
 )
 

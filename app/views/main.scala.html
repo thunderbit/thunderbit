@@ -1,4 +1,4 @@
-@(title: String, styles: Html = Html(""), scripts: Html = Html(""))(content: Html)
+@(title: String, styles: Html = Html(""), scripts: Html = Html(""), templates: Html = Html(""))(content: Html)
 
 @import tags._
 
@@ -15,6 +15,7 @@
     <body>
         @navbar()
         @content
+        @templates
         <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))"></script>
         <script src="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))"></script>
         @scripts
