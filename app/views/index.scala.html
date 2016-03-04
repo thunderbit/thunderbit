@@ -12,6 +12,12 @@
     </td>
     }
 </script>
+<script type="text/template" id="alert-template">
+    <div class="alert alert-<%- type %> alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <p><%- message %></p>
+    </div>
+</script>
 }
 
 @scripts = {
@@ -22,6 +28,83 @@
 <script src="@routes.Assets.versioned("javascripts/views/item-view.js")"></script>
 <script src="@routes.Assets.versioned("javascripts/views/app-view.js")"></script>
 <script src="@routes.Assets.versioned("javascripts/app.js")"></script>
+
+<script type="text/javascript">
+// Prepares upload modal to a new download
+function resetUploadModal () {
+    $('.upload-file-modal .upload-btn').button('reset');
+    $('.upload-file-modal .cancel-btn').show();
+    $('.upload-progress').hide();
+    updateUploadProgressBarValue(0);
+}
+
+// Updates the progress value of the upload progress bar
+function updateUploadProgressBarValue (percent) {
+    $('.upload-progress .progress-bar').css('width', percent + '%');
+    $('.upload-progress .progress-bar .sr-only').html(percent + "% @Messages.get("completed")");
+}
+
+$(document).ready(function(){
+    resetUploadModal();
+
+    $('.upload-file-modal .upload-btn').click(function(){
+        // Get the data from the upload form
+        var formData = new FormData($('.upload-form')[0]);
+
+        // Send upload form data trough Ajax (http://stackoverflow.com/questions/166221/how-can-i-upload-files-asynchronously)
+        $.ajax({
+            url: '@routes.Storage.upload',  //Server script to process data
+            type: 'POST',
+
+            // Custom XMLHttpRequest
+            xhr: function() {
+                var myXhr = $.ajaxSettings.xhr();
+                // Check if upload property exists
+                if(myXhr.upload){
+                    // For handling the progress of the upload
+                    myXhr.upload.addEventListener('progress',progressHandler, false);
+                }
+                return myXhr;
+            },
+
+            //Ajax events
+            success: completeHandler,
+            error: errorHandler,
+
+            // Form data
+            data: formData,
+
+            //Options to tell jQuery not to process data or worry about content-type.
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+
+        $('.upload-file-modal .cancel-btn').hide();
+        $('.upload-progress').show();
+        $('.upload-file-modal .upload-btn').button('uploading');
+
+        function progressHandler(e){
+            if(e.lengthComputable){
+                updateUploadProgressBarValue (e.loaded / e.total * 100);
+            }
+        }
+
+        function completeHandler(){
+            $('.upload-file-modal').modal('hide');
+            resetUploadModal();
+            app.items.fetch({reset: true});
+        }
+
+        function errorHandler(data){
+            $('.upload-file-modal .alert').remove();
+            var template = _.template($('#alert-template').html());
+            $('.upload-file-modal .modal-body').prepend(template({type: "danger", message: "@Messages.get("uploadError")"}));
+            resetUploadModal();
+        }
+    });
+});
+</script>
 }
 
 @main("Welcome to Play", null, scripts, templates) {

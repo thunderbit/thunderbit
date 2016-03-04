@@ -31,7 +31,7 @@
     <div class="modal fade upload-file-modal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                @helper.form(action = routes.Storage.upload, 'enctype -> "multipart/form-data", 'class -> "form-horizontal") {
+                <form enctype="multipart/form-data" class="form-horizontal upload-form">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="@Messages.get("close")"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="uploadFileModalLabel">@Messages.get("uploadFile")</h4>
@@ -43,12 +43,17 @@
                             <input type="file" name="file" id="file">
                         </div>
                     </div>
+                    <div class="progress upload-progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">0% Complete</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> @Messages.get("upload")</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> @Messages.get("cancel")</button>
+                    <button type="button" class="btn btn-primary upload-btn" data-uploading-text="@Messages.get("uploading")" autocomplete="off"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> @Messages.get("upload")</button>
+                    <button type="button" class="btn btn-default cancel-btn" data-dismiss="modal"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> @Messages.get("cancel")</button>
                 </div>
-                }
+                </form>
             </div>
         </div>
     </div>
