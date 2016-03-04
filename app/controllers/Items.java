@@ -1,5 +1,6 @@
 package controllers;
 
+import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.google.inject.Inject;
 import flexjson.JSONSerializer;
 import modules.services.api.IItemsService;
@@ -14,6 +15,7 @@ public class Items extends Controller {
     @Inject
     public modules.storage.Storage storage;
 
+    @SubjectPresent
     public F.Promise<Result> delete(String id) {
         // Returns a promise of deleting an item from the database
         return itemsService.delete(id)
