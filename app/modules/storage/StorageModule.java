@@ -15,7 +15,7 @@ public class StorageModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        String storageType = configuration.getString("storage.type", "local");
+        String storageType = configuration.getString("storage.type", "mock");
 
         switch (storageType) {
             case "mock" :
