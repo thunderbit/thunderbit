@@ -33,7 +33,7 @@ public class LocalFilesystemStorage implements Storage {
 
     @Override
     public F.Promise<Void> store(Path file, String key, String name) {
-        F.Promise promise = F.Promise.promise(() -> {
+        F.Promise<Void> promise = F.Promise.promise(() -> {
             Path keyPath = Files.createDirectory(storagePath.resolve(key));
             Files.copy(file, keyPath.resolve(name));
             return null;
@@ -49,7 +49,7 @@ public class LocalFilesystemStorage implements Storage {
 
     @Override
     public F.Promise<Void> delete(String key, String name) {
-        F.Promise promise = F.Promise.promise(() -> {
+        F.Promise<Void> promise = F.Promise.promise(() -> {
             Files.delete(storagePath.resolve(key).resolve(name));
             Files.delete(storagePath.resolve(key));
             return null;
