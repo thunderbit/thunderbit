@@ -38,4 +38,17 @@ public class StorageModuleTest extends WithApplication {
             assertThat("Storage has been mapped to a wrong type", instance instanceof AmazonS3Storage, is(true));
         });
     }
+
+    @Test
+    public void testMockStorageMapping () {
+        Application application = new GuiceApplicationBuilder()
+                .configure("storage.type", "mock")
+                .build();
+
+        running (application, () -> {
+            Storage instance = application.injector().instanceOf(Storage.class);
+            assertThat("Storage has not been mapped", instance, notNullValue());
+            assertThat("Storage has been mapped to a wrong type", instance instanceof MockStorage, is(true));
+        });
+    }
 }

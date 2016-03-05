@@ -18,6 +18,9 @@ public class StorageModule extends AbstractModule {
         String storageType = configuration.getString("storage.type", "local");
 
         switch (storageType) {
+            case "mock" :
+                bind (Storage.class).to(MockStorage.class);
+                break;
             case "local" :
                 bind (Storage.class).to(LocalFilesystemStorage.class);
                 break;
