@@ -12,6 +12,9 @@
     </td>
     }
 </script>
+<script type="text/template" id="tag-template">
+    <span class="label label-info tag"><%- name %> <a role="button" href="#" class="delete-btn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
+</script>
 <script type="text/template" id="alert-template">
     <div class="alert alert-<%- type %> alert-dismissible fade in" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -24,8 +27,11 @@
 <script src="@routes.WebJarAssets.at(WebJarAssets.locate("underscore-min.js"))"></script>
 <script src="@routes.WebJarAssets.at(WebJarAssets.locate("backbone-min.js"))"></script>
 <script src="@routes.Assets.versioned("javascripts/models/item.js")"></script>
+<script src="@routes.Assets.versioned("javascripts/models/tag.js")"></script>
 <script src="@routes.Assets.versioned("javascripts/collections/items.js")"></script>
+<script src="@routes.Assets.versioned("javascripts/collections/tags.js")"></script>
 <script src="@routes.Assets.versioned("javascripts/views/item-view.js")"></script>
+<script src="@routes.Assets.versioned("javascripts/views/tag-view.js")"></script>
 <script src="@routes.Assets.versioned("javascripts/views/app-view.js")"></script>
 <script src="@routes.Assets.versioned("javascripts/app.js")"></script>
 
@@ -36,6 +42,7 @@ function resetUploadModal () {
     $('.upload-file-modal .cancel-btn').show();
     $('.upload-progress').hide();
     updateUploadProgressBarValue(0);
+    app.uploadTags.reset();
 }
 
 // Updates the progress value of the upload progress bar
@@ -50,6 +57,9 @@ $(document).ready(function(){
     $('.upload-file-modal .upload-btn').click(function(){
         // Get the data from the upload form
         var formData = new FormData($('.upload-form')[0]);
+        app.uploadTags.each(function(tag) {
+            formData.append('tags', tag.get("name"));
+        });
 
         // Send upload form data trough Ajax (http://stackoverflow.com/questions/166221/how-can-i-upload-files-asynchronously)
         $.ajax({
@@ -102,6 +112,15 @@ $(document).ready(function(){
             $('.upload-file-modal .modal-body').prepend(template({type: "danger", message: "@Messages.get("uploadError")"}));
             resetUploadModal();
         }
+    });
+
+    $('.upload-file-modal .add-tag-btn').click(function(){
+        var tagsInput = $('.upload-file-modal .tags-input');
+        if (tagsInput.val() != null && tagsInput.val() != "" && app.uploadTags.findWhere({name: tagsInput.val()}) == null) {
+            app.uploadTags.add({name: tagsInput.val()});
+            tagsInput.val('');
+        }
+        tagsInput.focus();
     });
 });
 </script>

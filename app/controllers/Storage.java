@@ -9,6 +9,8 @@ import play.mvc.Http;
 import play.mvc.Result;
 import views.html.error;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class Storage extends Controller {
@@ -18,10 +20,13 @@ public class Storage extends Controller {
     @Inject
     public IItemsService itemsService;
 
+    private final String[] EMPTY_ARRAY = {};
+
     @SubjectPresent
     public F.Promise<Result> upload() {
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart file = body.getFile("file");
+        List<String> tags = Arrays.asList(body.asFormUrlEncoded().getOrDefault("tags", EMPTY_ARRAY));
 
         if (file != null) {
             String fileName = file.getFilename();
@@ -30,7 +35,7 @@ public class Storage extends Controller {
             // Returns a promise of storing the the file
             return storage.store(file.getFile().toPath(), uuid, file.getFilename())
                     // If the file storage is successful returns a promise of the database entity save
-                    .flatMap(aVoid -> itemsService.create(fileName, uuid)
+                    .flatMap(aVoid -> itemsService.create(fileName, uuid, tags)
                             // If the database entity save is successful returns a 200 Result
                             .map(item -> redirect(routes.Application.index()))
                             // If the database entity save is not successful returns a 500 Result

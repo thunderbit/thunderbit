@@ -23,11 +23,11 @@ import play.inject.ApplicationLifecycle;
 import play.inject.Injector;
 import play.inject.guice.GuiceInjectorBuilder;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -77,8 +77,8 @@ public class ItemsServiceTest {
 
     @Test
     public void testCreate () {
-        itemsService.create("someItemName", "someItemStorageKey").get(5, TimeUnit.SECONDS);
-        assertThat ("Item was not created", database.getCollection("items", Item.class).count(and(eq("name", "someItemName"), eq("storageKey", "someItemStorageKey"))), is(new Long(1)));
+        itemsService.create("someItemName", "someItemStorageKey", Arrays.asList("a", "b", "c")).get(5, TimeUnit.SECONDS);
+        assertThat ("Item was not created", database.getCollection("items", Item.class).count(and(eq("name", "someItemName"), eq("storageKey", "someItemStorageKey"), size("tags", 3), all("tags", Arrays.asList("a", "b", "c")))), is(new Long(1)));
     }
 
     @Test
