@@ -13,9 +13,11 @@ public interface IItemsService {
      *          The item's name
      * @param   storageKey
      *          The item's storage key
+     * @param   tags
+     *          The item's tags
      * @return  A promise of creating the item
      */
-    F.Promise<Item> create (String name, String storageKey);
+    F.Promise<Item> create (String name, String storageKey, List<String> tags);
 
     /**
      * Retrieves an item

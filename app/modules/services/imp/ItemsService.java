@@ -22,12 +22,13 @@ public class ItemsService implements IItemsService {
 
     private static final ALogger logger = Logger.of(ItemsService.class);
 
-    public F.Promise<Item> create (String name, String storageKey) {
+    public F.Promise<Item> create (String name, String storageKey, List<String> tags) {
         Promise<Item> promise = Futures.promise();
 
         Item item = new Item();
         item.name = name;
         item.storageKey = storageKey;
+        item.tags = tags;
 
         mongoDB.getDatabase().getCollection("items", Item.class)
                 .insertOne(item, (aVoid, throwable) -> {
