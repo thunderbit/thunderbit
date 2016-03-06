@@ -44,6 +44,7 @@ public class Items extends Controller {
                                 .include("id")
                                 .include("name")
                                 .include("storageKey")
+                                .include("tags")
                                 .exclude("*")
                                 .serialize(items);
                         return ok(serialized);
