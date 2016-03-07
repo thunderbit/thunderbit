@@ -1,5 +1,6 @@
 ---
 title: Hello Thunderbit!
+categories: [blog]
 ---
 Llevamos ya un mes y algo trabajando en el proyecto Thunderbit, sin embargo no podemos decir que hemos realmente comenzado sin que expliquemos qué es lo que estamos haciendo, y por qué lo hacemos. No tiene gracia trabajar en un proyecto de software libre sin decirle a nadie, ¿verdad?
 

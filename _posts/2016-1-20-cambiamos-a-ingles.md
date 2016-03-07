@@ -1,5 +1,6 @@
 ---
 title: Cambiamos a inglés
+categories: [blog]
 ---
 Uno de los beneficios del software libre es la posibilidad de trabajar con desarrolladores de las más diversas culturas en un mismo proyecto. Comenzamos Thunderbit en español, pues es nuestra lengua materna, y hasta ahora todo excepto el código fuente lo hemos mantenido en ese idioma: las tareas en Taiga, los tiquets en GitHub y el sitio del proyecto. Sin embargo, esto sólo facilita la colaboración a quienes hablan español.
 
