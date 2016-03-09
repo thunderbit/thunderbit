@@ -46,24 +46,31 @@ layout: basic
 	<div class="container">
 		<div class="row">
 			<header id="header" class="text-center">
-				<h2><i class="fa fa-book"></i> Blog</h2>
+				<h2>Blog</h2>
 			</header><!-- /header -->
 		</div>
-		{% for post in site.posts %}
 		<article>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-xs-6">
 					<header id="header" class="">
-						<h3><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h3>
-						<p><i class="fa fa-calendar"></i> {{ post.date | date_to_string}}</p>
+						<h3><a href="{{ site.baseurl }}{{ site.posts[0].url }}">{{ site.posts[0].title }}</a></h3>
+						<p><i class="fa fa-calendar"></i> {{ site.posts[0].date | date_to_string}}</p>
 					</header><!-- /header -->
-					{{ post.excerpt }}
-					<p><a href="{{ site.baseurl }}{{ post.url }}">Read more...</a></p>
-					<p><a href="{{ site.baseurl }}{{ post.url }}#disqus_thread">Read comments...</a></p>
+					{{ site.posts[0].excerpt }}
+					<p><a href="{{ site.baseurl }}{{ site.posts[0].url }}">Read more...</a></p>
+					<p><a href="{{ site.baseurl }}{{ site.posts[0].url }}#disqus_thread">Read comments...</a></p>
+				</div>
+				<div class="col-xs-6">
+					<header id="header" class="">
+						<h3><a href="{{ site.baseurl }}{{ site.posts[1].url }}">{{ site.posts[1].title }}</a></h3>
+						<p><i class="fa fa-calendar"></i> {{ site.posts[1].date | date_to_string}}</p>
+					</header><!-- /header -->
+					{{ site.posts[1].excerpt }}
+					<p><a href="{{ site.baseurl }}{{ site.posts[1].url }}">Read more...</a></p>
+					<p><a href="{{ site.baseurl }}{{ site.posts[1].url }}#disqus_thread">Read comments...</a></p>
 				</div>
 			</div>
 		</article>
-		{% endfor %}
 	</div>
 </section>
 {% include footer.html %}

@@ -1,5 +1,6 @@
 ---
-title: How we make thunderbit
+title: How we make Thunderbit
+categories: [blog]
 ---
 As promised in the first post, today we are talking about how we make Thunderbit.
 
