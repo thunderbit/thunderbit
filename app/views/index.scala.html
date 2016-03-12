@@ -67,6 +67,14 @@ function addTagToSearchBox () {
     tagsInput.focus();
 }
 
+function applySearchFilter () {
+    var tags = [];
+    app.searchTags.each(function(tag) {
+        tags.push(tag.get("name"));
+    });
+    app.items.fetch({data: {tags: tags.join(",")}, reset: true});
+}
+
 $(document).ready(function(){
     resetUploadModal();
 
@@ -117,9 +125,15 @@ $(document).ready(function(){
         }
 
         function completeHandler(){
+            var searchTags = app.searchTags.pluck("name");
+            var uploadTags = app.uploadTags.pluck("name");
+
+            if (_.every(searchTags, function (value) { return _.contains(uploadTags, value) })) {
+                applySearchFilter();
+            }
+
             $('.upload-file-modal').modal('hide');
             resetUploadModal();
-            app.items.fetch({reset: true});
         }
 
         function errorHandler(data){

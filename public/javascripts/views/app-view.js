@@ -17,9 +17,9 @@ var app = app || {};
 			this.listenTo(app.uploadTags, 'reset', this.resetUploadTagsView);
 
 			this.listenTo(app.searchTags, 'add', this.addSearchTagView);
-			this.listenTo(app.searchTags, 'update', this.fetchItems);
+			this.listenTo(app.searchTags, 'update', applySearchFilter);
 
-			app.items.fetch({reset: true});
+			applySearchFilter();
 		},
 
 		renderItems: function () {
@@ -43,14 +43,6 @@ var app = app || {};
         addSearchTagView: function (tag) {
             var view = new app.TagView({ model: tag });
             this.$searchTagsContainer.append(view.render().el);
-        },
-
-        fetchItems: function () {
-            var tags = [];
-            app.searchTags.each(function(tag) {
-                tags.push(tag.get("name"));
-            });
-            app.items.fetch({data: {tags: tags.join(",")}, reset: true});
         }
 	});
 })(jQuery);
