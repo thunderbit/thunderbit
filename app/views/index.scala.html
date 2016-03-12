@@ -145,6 +145,10 @@ $(document).ready(function(){
             addTagToSearchBox();
         }
     }).focus();
+
+    $('.upload-file-modal').on('hidden.bs.modal', function (e) {
+        resetUploadModal();
+    });
 });
 </script>
 }
