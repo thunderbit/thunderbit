@@ -15,6 +15,6 @@ close=Cerrar
 cancel=Cancelar
 uploading=Enviando
 uploadError=Oops...ha ocurrido un error mientras se enviaba tu fichero
-complete=Complete
+completed=Completado
 welcome=Bienvenido
 tags=Etiquetas
