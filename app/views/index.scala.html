@@ -58,6 +58,15 @@ function updateUploadProgressBarValue (percent) {
     $('.upload-progress .progress-bar .sr-only').html(percent + "% @Messages.get("completed")");
 }
 
+function addTagToSearchBox () {
+    var tagsInput = $('.search-box .tags-input');
+    if (tagsInput.val() != null && tagsInput.val() != "" && app.searchTags.findWhere({name: tagsInput.val()}) == null) {
+        app.searchTags.add({name: tagsInput.val()});
+        tagsInput.val('');
+    }
+    tagsInput.focus();
+}
+
 $(document).ready(function(){
     resetUploadModal();
 
@@ -129,12 +138,33 @@ $(document).ready(function(){
         }
         tagsInput.focus();
     });
+
+    $('.search-box .add-tag-btn').click(addTagToSearchBox);
+    $('.search-box .tags-input').keyup(function(event) {
+        if (event.which == 13) {
+            addTagToSearchBox();
+        }
+    }).focus();
 });
 </script>
 }
 
 @main(Messages.get("welcome"), null, scripts, templates) {
 <div class="container thunderbit-app">
+    <div class="row">
+        <div class="col-xs-12 search-box">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></span>
+                    <input type="text" class="form-control input-lg tags-input" placeholder="@Messages.get("searchBoxText")">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-lg add-tag-btn" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                    </span>
+                </div>
+            </div>
+            <ul class="list-unstyled list-inline tags-container"></ul>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xs-12">
             <table class="table">

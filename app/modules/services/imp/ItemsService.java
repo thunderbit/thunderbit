@@ -14,6 +14,7 @@ import scala.concurrent.Promise;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mongodb.client.model.Filters.all;
 import static com.mongodb.client.model.Filters.eq;
 
 public class ItemsService implements IItemsService {
@@ -81,6 +82,22 @@ public class ItemsService implements IItemsService {
 
         mongoDB.getDatabase().getCollection("items", Item.class)
                 .find().into(new ArrayList<>(), (items, throwable) -> {
+            if (throwable == null) {
+                promise.success(items);
+            } else {
+                logger.error("Could not read items from database", throwable);
+                promise.failure(throwable);
+            }
+        });
+
+        return F.Promise.wrap(promise.future());
+    }
+
+    public F.Promise<List<Item>> findTagged(List<String> tags) {
+        Promise<List<Item>> promise = Futures.promise();
+
+        mongoDB.getDatabase().getCollection("items", Item.class)
+                .find(all("tags", tags)).into(new ArrayList<>(), (items, throwable) -> {
             if (throwable == null) {
                 promise.success(items);
             } else {

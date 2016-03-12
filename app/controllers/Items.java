@@ -3,10 +3,15 @@ package controllers;
 import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.google.inject.Inject;
 import flexjson.JSONSerializer;
+import models.Item;
 import modules.services.api.IItemsService;
+import play.data.Form;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Items extends Controller {
     @Inject
@@ -36,8 +41,19 @@ public class Items extends Controller {
     }
 
     public F.Promise<Result> list() {
-        // Returns a promise of fetching all items from the database
-        return itemsService.findAll()
+        String jointTags = Form.form().bindFromRequest().get("tags");
+
+        // Get a promise of fetching items from the database
+        F.Promise<List<Item>> itemsPromise;
+        if (jointTags != null && !jointTags.isEmpty()) {
+            List<String> tags = Arrays.asList(jointTags.split(","));
+            itemsPromise = itemsService.findTagged(tags);
+        } else {
+            itemsPromise = itemsService.findAll();
+        }
+
+        // Returns the items fetching promise
+        return itemsPromise
                 .map(items -> {
                     if (items != null) {
                         String serialized = new JSONSerializer()
