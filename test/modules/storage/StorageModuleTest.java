@@ -30,6 +30,7 @@ public class StorageModuleTest extends WithApplication {
                 .configure("storage.type", "s3")
                 .configure("storage.s3.accesskey", "")
                 .configure("storage.s3.secretkey", "")
+                .configure("storage.s3.createBucket", false)
                 .build();
 
         running (application, () -> {
