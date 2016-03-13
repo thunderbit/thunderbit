@@ -6,7 +6,8 @@ var app = app || {};
 	app.Item = Backbone.Model.extend({
 		defaults: {
 		    id: '',
-			name: ''
+			name: '',
+			tags: []
 		}
 	});
 })();

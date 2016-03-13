@@ -97,4 +97,14 @@ public class ItemsServiceTest {
         itemsService.delete(id.toString()).get(5, TimeUnit.SECONDS);
         assertThat ("Item was not deleted", database.getCollection("items", Item.class).count(), is(new Long(0)));
     }
+
+    @Test
+    public void testFindTagged () {
+        itemsService.create("item1", "item1StorageKey", Arrays.asList("a", "b", "c")).get(5, TimeUnit.SECONDS);
+        itemsService.create("item2", "item2StorageKey", Arrays.asList("b", "c", "d")).get(5, TimeUnit.SECONDS);
+        assertThat ("Tagged item not found", itemsService.findTagged(Arrays.asList("a", "b")).get(5, TimeUnit.SECONDS).size(), is(1));
+        assertThat ("Tagged items not found", itemsService.findTagged(Arrays.asList("b", "c")).get(5, TimeUnit.SECONDS).size(), is(2));
+        assertThat ("Tagged item not found", itemsService.findTagged(Arrays.asList("c", "d")).get(5, TimeUnit.SECONDS).size(), is(1));
+        assertThat ("Items found where there should be none", itemsService.findTagged(Arrays.asList("a", "d")).get(5, TimeUnit.SECONDS).size(), is(0));
+    }
 }

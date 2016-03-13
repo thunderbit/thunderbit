@@ -43,4 +43,11 @@ public interface IItemsService {
      * @return  A promise of retrieving all items
      */
     F.Promise<List<Item>> findAll ();
+
+    /**
+     * Retrieves items with specified tags
+     *
+     * @return  A promise of retrieving tagged items
+     */
+    F.Promise<List<Item>> findTagged(List<String> tags);
 }

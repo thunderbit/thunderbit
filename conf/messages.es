@@ -18,3 +18,4 @@ uploadError=Oops...ha ocurrido un error mientras se enviaba tu fichero
 completed=Completado
 welcome=Bienvenido
 tags=Etiquetas
+searchBoxText=Pon algunas etiquetas aquí

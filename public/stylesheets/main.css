@@ -2,8 +2,12 @@ body {
     padding-top: 70px;
 }
 
+.tags-container {
+    margin: 0px;
+}
+
 .tags-container li {
-    padding: 5px;
+    padding: 2px;
 }
 
 .tag .delete-btn {
