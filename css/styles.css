@@ -1,4 +1,13 @@
 
+@font-face {
+		font-family: OpenSans-Regular;
+		src: url(../fonts/OpenSans-Regular.ttf);
+}
+
+body {
+	font-family: OpenSans-Regular !important;
+}
+
 #competition-banner {
 	padding-top: 1px;
 	height: 25px;
