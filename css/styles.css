@@ -88,6 +88,10 @@ header .container {
 	padding-left: 53px;
 }
 
+.post-content {
+	text-align: justify;
+}
+
 .social-buttons {
 	padding-top: 20px;
 }
