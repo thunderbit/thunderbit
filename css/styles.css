@@ -140,6 +140,10 @@ header .container {
 	background-color: #ffffff;
 }
 
+.post-excerpt {
+	text-align: justify;
+}
+
 footer {
 	color: #fff;
 	background-color: #333;
