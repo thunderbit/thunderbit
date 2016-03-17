@@ -20,7 +20,7 @@ author: all
 						<h3><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h3>
 						<p><i class="fa fa-calendar"></i> {{ post.date | date_to_string}}</p>
 					</header><!-- /header -->
-					{{ post.excerpt }}
+					<div class="post-excerpt">{{ post.excerpt }}</div>
 					<p><a href="{{ site.baseurl }}{{ post.url }}">Read more...</a></p>
 					<p><a href="{{ site.baseurl }}{{ post.url }}#disqus_thread">Read comments...</a></p>
 				</div>
