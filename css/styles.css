@@ -88,6 +88,10 @@ header .container {
 	padding-left: 53px;
 }
 
+.post-content {
+	text-align: justify;
+}
+
 .social-buttons {
 	padding-top: 20px;
 }
@@ -138,6 +142,10 @@ header .container {
 #posts-container {
 	padding: 15px 0px 30px 0px;
 	background-color: #ffffff;
+}
+
+.post-excerpt {
+	text-align: justify;
 }
 
 footer {

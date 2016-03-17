@@ -10,7 +10,7 @@ layout: basic
         <h1><a href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a></h1>
         <p><i class="fa fa-calendar"></i> {{ page.date | date_to_string}}</p>
         </div>
-        {{ content }}
+        <div class="post-content">{{ content }}</div>
         {% include social-share.html %}
         {% if page.comments %}
           {% include disqus-universal-code.html %}
