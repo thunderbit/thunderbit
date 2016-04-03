@@ -7,10 +7,10 @@ scala:
   - 2.11.6
 
 services:
-  - mongodb
+  - postgresql
 
 before_script:
-  - sleep 15
+  - psql -c 'create database test;' -U postgres
 
 script:
   - sbt test
