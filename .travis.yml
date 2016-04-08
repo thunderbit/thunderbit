@@ -10,7 +10,7 @@ services:
   - postgresql
 
 before_script:
-  - wget https://downloads.typesafe.com/typesafe-activator/1.3.6/typesafe-activator-1.3.6.zip
+  - wget http://downloads.typesafe.com/typesafe-activator/1.3.6/typesafe-activator-1.3.6.zip
   - unzip -q typesafe-activator-1.3.6.zip
   - psql -c 'create database test;' -U postgres
 
