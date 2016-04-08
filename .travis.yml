@@ -13,7 +13,7 @@ before_script:
   - psql -c 'create database test;' -U postgres
 
 script:
-  - sbt testOnly DatabaseTest
+  - sbt test:testOnly DatabaseTest
 
 cache:
   directories:
