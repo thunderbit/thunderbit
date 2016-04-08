@@ -1,55 +1,36 @@
 package modules.storage;
 
 import org.junit.Test;
+import org.junit.BeforeClass;
 import play.Application;
 import play.inject.guice.GuiceApplicationBuilder;
 import play.test.WithApplication;
+import play.Play;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static play.test.Helpers.running;
+import static play.test.Helpers.fakeApplication;
 
 public class StorageModuleTest extends WithApplication {
+    private static Map<String, Object> configOverrides;
+
+    @BeforeClass
+    public static void prepareConfigOverrides() {
+        configOverrides = new HashMap<>();
+        configOverrides.put("storage.type", "local");
+    }
+
     @Test
     public void testLocalFilesystemStorageMapping () {
-        Application application = new GuiceApplicationBuilder()
-                .configure("storage.type", "local")
-                .build();
-
-        running (application, () -> {
-            Storage instance = application.injector().instanceOf(Storage.class);
+        running (fakeApplication(configOverrides), () -> {
+            Storage instance = Play.application().injector().instanceOf(Storage.class);
             assertThat("Storage has not been mapped", instance, notNullValue());
             assertThat("Storage has been mapped to a wrong type", instance instanceof LocalFilesystemStorage, is(true));
-        });
-    }
-
-    @Test
-    public void testAmazonS3StorageMapping () {
-        Application application = new GuiceApplicationBuilder()
-                .configure("storage.type", "s3")
-                .configure("storage.s3.accesskey", "")
-                .configure("storage.s3.secretkey", "")
-                .configure("storage.s3.createBucket", false)
-                .build();
-
-        running (application, () -> {
-            Storage instance = application.injector().instanceOf(Storage.class);
-            assertThat("Storage has not been mapped", instance, notNullValue());
-            assertThat("Storage has been mapped to a wrong type", instance instanceof AmazonS3Storage, is(true));
-        });
-    }
-
-    @Test
-    public void testMockStorageMapping () {
-        Application application = new GuiceApplicationBuilder()
-                .configure("storage.type", "mock")
-                .build();
-
-        running (application, () -> {
-            Storage instance = application.injector().instanceOf(Storage.class);
-            assertThat("Storage has not been mapped", instance, notNullValue());
-            assertThat("Storage has been mapped to a wrong type", instance instanceof MockStorage, is(true));
         });
     }
 }

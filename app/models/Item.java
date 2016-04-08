@@ -1,17 +1,39 @@
 package models;
 
-import fr.javatic.mongo.jacksonCodec.objectId.Id;
+import com.avaje.ebean.Model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Item {
+@Entity
+public class Item extends Model {
     @Id
-    public String id;
+    public Long id;
 
     public String name;
 
     public String storageKey;
 
-    public List<String> tags = new ArrayList<>();
+    @ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
+    public List<Tag> tags;
+
+    public Item () {
+        tags = new ArrayList<>();
+    }
+
+    public static Finder<Long,Item> find = new Finder<Long,Item>(
+            "default", Item.class
+    );
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 }

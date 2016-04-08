@@ -1,19 +1,18 @@
-language: scala
+language: java
 
 jdk:
   - oraclejdk8
 
-scala:
-  - 2.11.6
-
 services:
-  - mongodb
+  - postgresql
 
 before_script:
-  - sleep 15
+  - wget http://downloads.typesafe.com/typesafe-activator/1.3.9/typesafe-activator-1.3.9-minimal.zip
+  - unzip -q typesafe-activator-1.3.9-minimal.zip
+  - psql -c 'create database test;' -U postgres
 
 script:
-  - sbt test
+  - activator-1.3.9-minimal/bin/activator test
 
 cache:
   directories:
