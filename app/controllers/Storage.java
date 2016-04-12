@@ -2,13 +2,15 @@ package controllers;
 
 import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.google.inject.Inject;
-import modules.services.api.IItemsService;
+import models.Item;
+import models.Tag;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import views.html.error;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -16,9 +18,6 @@ import java.util.UUID;
 public class Storage extends Controller {
     @Inject
     public modules.storage.Storage storage;
-
-    @Inject
-    public IItemsService itemsService;
 
     private final String[] EMPTY_ARRAY = {};
 
@@ -32,36 +31,47 @@ public class Storage extends Controller {
             String fileName = file.getFilename();
             String uuid = UUID.randomUUID().toString();
 
-            // Returns a promise of storing the the file
+            // Returns a promise of storing the file
             return storage.store(file.getFile().toPath(), uuid, file.getFilename())
-                    // If the file storage is successful returns a promise of the database entity save
-                    .flatMap(aVoid -> itemsService.create(fileName, uuid, tags)
-                            // If the database entity save is successful returns a 200 Result
-                            .map(item -> redirect(routes.Application.index()))
-                            // If the database entity save is not successful returns a 500 Result
-                            .recover(throwable -> internalServerError(error.render()))
-                    // If the file storage fails returns a 500 Result
-                    .recover(throwable -> internalServerError(error.render())));
+                    // If the file storage is successful saves the Item to the database
+                    .map(aVoid -> {
+                        // Get the list of Tag entities for the new Item
+                        List<Tag> tagsList = new ArrayList<>();
+                        for (String tagName : tags) {
+                            Tag tag = Tag.find.where().eq("name", tagName).findUnique();
+                            // Create new tags if they doesn't already exist
+                            if (tag == null) {
+                                tag = new Tag();
+                                tag.name = tagName;
+                                tag.save();
+                            }
+                            tagsList.add(tag);
+                        }
+
+                        Item item = new Item();
+                        item.name = fileName;
+                        item.storageKey = uuid;
+                        item.setTags(tagsList);
+                        item.save();
+
+                        return ok();
+                    });
         } else {
             return F.Promise.pure(badRequest());
         }
     }
 
-    public F.Promise<Result> download(String id) {
-        // Returns a promise of retrieving an item from the database
-        return itemsService.read(id)
-                .flatMap(item -> {
-                    if (item == null) {
-                        // If there is no item with the provided id returns a 404 Result
-                        return F.Promise.pure(notFound());
-                    } else {
-                        // Returns a promise of retrieving a download URL for the stored file
-                        return storage.getDownload(item.storageKey, item.name)
-                                // If an error occurs when retrieving the download URL returns a 500 Result
-                                .recover(throwable -> internalServerError(error.render()));
-                    }
-                })
-                // If an error occurs when retrieving the item returns a 500 Result
-                .recover(throwable -> internalServerError(error.render()));
+    public F.Promise<Result> download(Long id) {
+        // Retrieves the item from the database
+        Item item = Item.find.byId(id);
+        if (item == null) {
+            // If there is no item with the provided id returns a 404 Result
+            return F.Promise.pure(notFound());
+        } else {
+            // Returns a promise of retrieving a download URL for the stored file
+            return storage.getDownload(item.storageKey, item.name)
+                    // If an error occurs when retrieving the download URL returns a 500 Result
+                    .recover(throwable -> internalServerError(error.render()));
+        }
     }
 }
