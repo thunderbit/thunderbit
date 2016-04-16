@@ -1,6 +1,6 @@
 # [Thunderbit](http://thunderbit.github.io/thunderbit/)
 
-[![Managed with Taiga.io](https://taiga.io/media/support/attachments/article-22/banner-gh.png)](https://tree.taiga.io/project/thunderbit/ "Managed with Taiga.io")
+[![Managed with Taiga.io](https://img.shields.io/badge/managed%20with-Taiga.io-green.svg)](https://tree.taiga.io/project/thunderbit/ "Managed with Taiga.io")
 [![Build Status](https://travis-ci.org/thunderbit/thunderbit.svg?branch=master)](https://travis-ci.org/thunderbit/thunderbit)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/7ce48d45bf8e4e769217676b3fa259bb)](https://www.codacy.com/app/rickmclean/thunderbit)
 [![Heroku Badge](http://heroku-badge.herokuapp.com/?app=thunderbit)](https://thunderbit.herokuapp.com/)
