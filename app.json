@@ -28,7 +28,8 @@
       "required": true
     },
     "SECRET": {
-      "required": true
+      "required": true,
+      "generator": "secret"
     },
     "USERNAME": {
       "required": true
