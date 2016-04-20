@@ -74,6 +74,12 @@ storage.s3.createBucket = true
 
 If you installed *Activator* on step 1, execute `activator run` inside the project's root. If you installed *SBT*, execute `sbt run` instead.
 
+## How to run it in the cloud
+
+Thunderbit plays well with [Heroku](https://heroku.com). The easiest way to deploy a new instance is through this [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) button. All you need is a free Heroku account.
+
+If for some reason the above button doesn't work then fork the repo and follow [Heroku and GitHub integration instructions](https://devcenter.heroku.com/articles/github-integration).
+
 ## Bugs and feature requests
 
 Found a bug or have a feature request? Great! Please first read the [issue guidelines](CONTRIBUTING.md#taiga-issues) and search for [existing and closed issues at Taiga.io](https://tree.taiga.io/project/thunderbit/issues). If your problem or idea is not addressed yet, please open a new issue.
