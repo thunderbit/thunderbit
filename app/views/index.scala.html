@@ -200,4 +200,51 @@ $(document).ready(function(){
         </div>
     </div>
 </div>
+
+@subjectPresent() {
+<div class="modal fade upload-file-modal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form enctype="multipart/form-data" class="form-horizontal upload-form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="@Messages.get("close")"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="uploadFileModalLabel">@Messages.get("uploadFile")</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="file" class="col-sm-2 control-label">Fichero</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="file" id="file">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tags" class="col-sm-2 control-label">@Messages.get("tags")</label>
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control tags-input" id="tags">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default add-tag-btn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <ul class="list-inline list-unstyled tags-container"></ul>
+                        </div>
+                    </div>
+                    <div class="progress upload-progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">0% Complete</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary upload-btn" data-uploading-text="@Messages.get("uploading")" autocomplete="off"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> @Messages.get("upload")</button>
+                    <button type="button" class="btn btn-default cancel-btn" data-dismiss="modal"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> @Messages.get("cancel")</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+}
+
 }
