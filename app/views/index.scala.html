@@ -43,6 +43,11 @@
 <script src="@routes.Assets.versioned("javascripts/app.js")"></script>
 
 <script type="text/javascript">
+// Messages
+var messages = {};
+messages['completed'] = "@Messages.get("completed")";
+messages['uploadError'] = "@Messages.get("uploadError")";
+
 // Prepares upload modal to a new download
 function resetUploadModal () {
     $('.upload-file-modal .upload-btn').button('reset');
@@ -55,7 +60,7 @@ function resetUploadModal () {
 // Updates the progress value of the upload progress bar
 function updateUploadProgressBarValue (percent) {
     $('.upload-progress .progress-bar').css('width', percent + '%');
-    $('.upload-progress .progress-bar .sr-only').html(percent + "% @Messages.get("completed")");
+    $('.upload-progress .progress-bar .sr-only').html(percent + "% " + messages['completed']);
 }
 
 function addTagToSearchBox () {
@@ -139,7 +144,7 @@ $(document).ready(function(){
         function errorHandler(data){
             $('.upload-file-modal .alert').remove();
             var template = _.template($('#alert-template').html());
-            $('.upload-file-modal .modal-body').prepend(template({type: "danger", message: "@Messages.get("uploadError")"}));
+            $('.upload-file-modal .modal-body').prepend(template({type: "danger", message: messages['uploadError']}));
             resetUploadModal();
         }
     });
