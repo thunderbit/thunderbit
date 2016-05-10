@@ -17,3 +17,6 @@ defaults:
 name: Thunderbit
 description: A web application for digital assets management
 url: http://thunderbit.github.io/thunderbit
+
+gems:
+  - jemoji
