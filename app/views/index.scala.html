@@ -1,3 +1,4 @@
+@import helper._
 @import play.i18n._
 @import be.objectify.deadbolt.java.views.html.subjectPresent
 
@@ -41,6 +42,10 @@
 <script src="@routes.Assets.versioned("javascripts/views/tag-view.js")"></script>
 <script src="@routes.Assets.versioned("javascripts/views/app-view.js")"></script>
 <script src="@routes.Assets.versioned("javascripts/app.js")"></script>
+
+@javascriptRouter("jsRoutes")(
+    routes.javascript.Storage.upload
+)
 
 <script type="text/javascript">
 // Messages
@@ -92,7 +97,7 @@ $(document).ready(function(){
 
         // Send upload form data trough Ajax (http://stackoverflow.com/questions/166221/how-can-i-upload-files-asynchronously)
         $.ajax({
-            url: '@routes.Storage.upload',  //Server script to process data
+            url: jsRoutes.controllers.Storage.upload().url,  //Server script to process data
             type: 'POST',
 
             // Custom XMLHttpRequest
