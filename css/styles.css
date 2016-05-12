@@ -88,6 +88,11 @@ header .container {
 	padding-left: 53px;
 }
 
+.center-image-markdown {
+    margin: 0 auto;
+    display: block;
+}
+
 .post-content {
 	text-align: justify;
 }
