@@ -53,7 +53,9 @@ $(document).ready(function(){
         resetUploadModal();
     });
 
-    $('.upload-file-modal .upload-btn').click(function(){
+    $('.upload-form').submit(function( event ) {
+        event.preventDefault();
+
         // Get the data from the upload form
         var formData = new FormData($('.upload-form')[0]);
         app.uploadTags.each(function(tag) {
