@@ -74,6 +74,7 @@ $(document).ready(function(){
                 if(myXhr.upload){
                     // For handling the progress of the upload
                     myXhr.upload.addEventListener('progress',progressHandler, false);
+                    $('.upload-progress').show();
                 }
                 return myXhr;
             },
@@ -92,7 +93,6 @@ $(document).ready(function(){
         });
 
         $('.upload-file-modal .cancel-btn').hide();
-        $('.upload-progress').show();
         $('.upload-file-modal .upload-btn').button('uploading');
 
         function progressHandler(e){
