@@ -13,7 +13,7 @@ function updateUploadProgressBarValue (percent) {
     $('.upload-progress .progress-bar .sr-only').html(percent + "% " + messages['completed']);
 }
 
-function addTagToSearchBox () {
+function addTagFromSearchBoxTagsInput () {
     var tagsInput = $('.search-box .tags-input');
     if (tagsInput.val() != null && tagsInput.val() != "" && app.searchTags.findWhere({name: tagsInput.val()}) == null) {
         app.searchTags.add({name: tagsInput.val()});
@@ -42,10 +42,10 @@ $(document).ready(function(){
         tagsInput.focus();
     });
 
-    $('.search-box .add-tag-btn').click(addTagToSearchBox);
+    $('.search-box .add-tag-btn').click(addTagFromSearchBoxTagsInput);
     $('.search-box .tags-input').keyup(function(event) {
         if (event.which == 13) {
-            addTagToSearchBox();
+            addTagFromSearchBoxTagsInput();
         }
     }).focus();
 
