@@ -11,6 +11,9 @@ GET     /download/:id               controllers.Storage.download(id: Long)
 DELETE  /items/:id                  controllers.Items.delete(id: Long)
 GET     /items                      controllers.Items.list()
 
+# Tags
+GET     /tags/find/:name            controllers.Tags.findByName(name: String)
+
 GET     /login                      controllers.Authentication.login
 POST    /login                      controllers.Authentication.doLogin
 GET     /logout                     controllers.Authentication.logout
