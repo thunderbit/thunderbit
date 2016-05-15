@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,10 @@ public class Item extends Model {
     public String name;
 
     public String storageKey;
+
+    public Date uploadDate;
+
+    public Long fileSize;
 
     @ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
     public List<Tag> tags;

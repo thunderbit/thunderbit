@@ -10,10 +10,7 @@ import play.mvc.Http;
 import play.mvc.Result;
 import views.html.error;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Storage extends Controller {
     @Inject
@@ -30,6 +27,8 @@ public class Storage extends Controller {
         if (file != null) {
             String fileName = file.getFilename();
             String uuid = UUID.randomUUID().toString();
+            Date uploadDate = Calendar.getInstance().getTime();
+            Long fileSize = file.getFile().length();
 
             // Returns a promise of storing the file
             return storage.store(file.getFile().toPath(), uuid, file.getFilename())
@@ -51,6 +50,8 @@ public class Storage extends Controller {
                         Item item = new Item();
                         item.name = fileName;
                         item.storageKey = uuid;
+                        item.uploadDate = uploadDate;
+                        item.fileSize = fileSize;
                         item.setTags(tagsList);
                         item.save();
 

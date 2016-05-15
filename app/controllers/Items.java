@@ -50,9 +50,9 @@ public class Items extends Controller {
                 }
             }
 
-            items = Item.find.where().in("tags", tags).findList();
+            items = Item.find.where().in("tags", tags).orderBy().desc("uploadDate").findList();
         } else {
-            items = Item.find.all();
+            items = Item.find.orderBy().desc("uploadDate").findList();
         }
 
         if (items != null) {
@@ -61,6 +61,8 @@ public class Items extends Controller {
                     .include("name")
                     .include("storageKey")
                     .include("tags.name")
+                    .include("uploadDate")
+                    .include("fileSize")
                     .exclude("*")
                     .serialize(items);
             return ok(serialized);

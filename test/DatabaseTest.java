@@ -10,10 +10,7 @@ import play.db.Database;
 import play.db.Databases;
 import play.db.evolutions.Evolutions;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.*;
 import static play.test.Helpers.fakeApplication;
@@ -60,19 +57,29 @@ public class DatabaseTest {
             Item item = new Item();
             item.name = "someName";
             item.storageKey = "someStorageKey";
+            item.fileSize = 100L;
+            Date uploadDate = Calendar.getInstance().getTime();
+            item.uploadDate = uploadDate;
             item.save();
 
             item = Item.find.byId(item.id);
             assertEquals("someName", item.name);
             assertEquals("someStorageKey", item.storageKey);
+            assertEquals(100, item.fileSize.intValue());
+            assertEquals(uploadDate, item.uploadDate);
 
             item.name = "someName2";
             item.storageKey = "someStorageKey2";
+            item.fileSize = 200L;
+            uploadDate = Calendar.getInstance().getTime();
+            item.uploadDate = uploadDate;
             item.save();
 
             item = Item.find.byId(item.id);
             assertEquals("someName2", item.name);
             assertEquals("someStorageKey2", item.storageKey);
+            assertEquals(200, item.fileSize.intValue());
+            assertEquals(uploadDate, item.uploadDate);
 
             item.delete();
             assertNull(Item.find.byId(item.id));
