@@ -17,8 +17,8 @@ function updateUploadProgressBarValue (percent) {
 // creates a tag from it and adds it to the search tags list
 function addTagFromSearchBoxTagsInput () {
     var tagsInput = $('.search-box .tags-input.typeahead.tt-input');
-    if (tagsInput.val() != null && tagsInput.val() != "" && app.searchTags.findWhere({name: tagsInput.val()}) == null) {
-        app.searchTags.add({name: tagsInput.val()});
+    if (tagsInput.val() != null && tagsInput.val() != "" && app.searchTags.findWhere({name: tagsInput.val().toLowerCase()}) == null) {
+        app.searchTags.add({name: tagsInput.val().toLowerCase()});
         tagsInput.val('');
     }
     tagsInput.focus();
@@ -28,8 +28,8 @@ function addTagFromSearchBoxTagsInput () {
 // creates a tag from it and adds it to the upload tags list
 function addTagFromUploadBoxTagsInput () {
     var tagsInput = $('.upload-file-modal .tags-input.typeahead.tt-input');
-    if (tagsInput.val() != null && tagsInput.val() != "" && app.uploadTags.findWhere({name: tagsInput.val()}) == null) {
-        app.uploadTags.add({name: tagsInput.val()});
+    if (tagsInput.val() != null && tagsInput.val() != "" && app.uploadTags.findWhere({name: tagsInput.val().toLowerCase()}) == null) {
+        app.uploadTags.add({name: tagsInput.val().toLowerCase()});
         tagsInput.val('');
     }
     tagsInput.focus();
