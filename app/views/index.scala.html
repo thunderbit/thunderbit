@@ -31,9 +31,14 @@
 </script>
 }
 
+@styles = {
+<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("vendor/typeahead.js-bootstrap3.less/0.2.3/typeahead.css")">
+}
+
 @scripts = {
 <script src="@routes.WebJarAssets.at(WebJarAssets.locate("underscore-min.js"))"></script>
 <script src="@routes.WebJarAssets.at(WebJarAssets.locate("backbone-min.js"))"></script>
+<script src="@routes.WebJarAssets.at(WebJarAssets.locate("typeahead.bundle.min.js"))"></script>
 <script src="@routes.Assets.versioned("javascripts/models/item.js")"></script>
 <script src="@routes.Assets.versioned("javascripts/models/tag.js")"></script>
 <script src="@routes.Assets.versioned("javascripts/collections/items.js")"></script>
@@ -52,21 +57,19 @@ messages['uploadError'] = "@Messages.get("uploadError")";
 </script>
 
 @javascriptRouter("jsRoutes")(
-    routes.javascript.Storage.upload
+    routes.javascript.Storage.upload,
+    routes.javascript.Tags.findByName
 )
 }
 
-@main(Messages.get("welcome"), null, scripts, templates) {
+@main(Messages.get("welcome"), styles, scripts, templates) {
 <div class="container thunderbit-app">
     <div class="row">
         <div class="col-xs-12 search-box">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></span>
-                    <input type="text" class="form-control input-lg tags-input" placeholder="@Messages.get("searchBoxText")">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-lg add-tag-btn" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                    </span>
+                    <input type="text" class="form-control input-lg tags-input typeahead" placeholder="@Messages.get("searchBoxText")" autocomplete="off" spellcheck="false">
                 </div>
             </div>
             <ul class="list-unstyled list-inline tags-container"></ul>
@@ -110,7 +113,7 @@ messages['uploadError'] = "@Messages.get("uploadError")";
                         <label for="tags" class="col-sm-2 control-label">@Messages.get("tags")</label>
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input type="text" class="form-control tags-input" id="tags">
+                                <input type="text" class="form-control tags-input typeahead" autocomplete="off" spellcheck="false" id="tags">
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default add-tag-btn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                 </span>

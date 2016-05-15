@@ -19,6 +19,7 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap" % "3.3.6",
   "org.webjars" % "backbonejs" % "1.2.3",
   "org.webjars" % "underscorejs" % "1.8.3",
+  "org.webjars" % "typeaheadjs" % "0.11.1",
   "net.sf.flexjson" % "flexjson" % "3.3",
   "be.objectify" %% "deadbolt-java" % "2.4.4"
 )
