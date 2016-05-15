@@ -22,6 +22,15 @@ function addTagFromSearchBoxTagsInput () {
     tagsInput.focus();
 }
 
+function addTagFromUploadBoxTagsInput () {
+    var tagsInput = $('.upload-file-modal .tags-input.typeahead.tt-input');
+    if (tagsInput.val() != null && tagsInput.val() != "" && app.uploadTags.findWhere({name: tagsInput.val()}) == null) {
+        app.uploadTags.add({name: tagsInput.val()});
+        tagsInput.val('');
+    }
+    tagsInput.focus();
+}
+
 function applySearchFilter () {
     var tags = [];
     app.searchTags.each(function(tag) {
@@ -33,13 +42,30 @@ function applySearchFilter () {
 $(document).ready(function(){
     resetUploadModal();
 
-    $('.upload-file-modal .add-tag-btn').click(function(){
-        var tagsInput = $('.upload-file-modal .tags-input');
-        if (tagsInput.val() != null && tagsInput.val() != "" && app.uploadTags.findWhere({name: tagsInput.val()}) == null) {
-            app.uploadTags.add({name: tagsInput.val()});
-            tagsInput.val('');
+    var tags = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: jsRoutes.controllers.Tags.findByName("TAG_NAME").url,
+            wildcard: 'TAG_NAME'
         }
-        tagsInput.focus();
+    });
+
+    $('.upload-file-modal .tags-input').typeahead({
+        highlight: true
+    },
+    {
+        name: 'tags',
+        display: 'name',
+        source: tags
+    });
+
+    $('.upload-file-modal .tags-input').bind('typeahead:select', function(ev, suggestion) {
+        addTagFromUploadBoxTagsInput ();
+    });
+
+    $('.upload-file-modal .add-tag-btn').click(function(){
+        addTagFromUploadBoxTagsInput ();
     });
 
     $('.search-box .add-tag-btn').click(addTagFromSearchBoxTagsInput);
