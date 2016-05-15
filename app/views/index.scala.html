@@ -14,6 +14,17 @@
             <% } %>
         </ul>
     </td>
+    <td>
+        <%
+        if(fileSize < 1024) print(fileSize.toFixed(2) + ' b');
+        else if(fileSize < 1048576) print((fileSize / 1024).toFixed(2) + ' kB');
+        else if(fileSize < 1073741824) print((fileSize / (1024 * 1024)).toFixed(2) + ' mB');
+        else print((fileSize / (1024 * 1024 * 1024)).toFixed(2) + ' gB');
+        %>
+    </td>
+    <td>
+        <% print(new Date(uploadDate).toDateString()); %>
+    </td>
     @subjectPresent() {
     <td>
         <button type="button" class="btn btn-danger btn-xs delete-btn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <span class="hidden-xs">@Messages.get("delete")</span></button>
@@ -80,6 +91,9 @@ messages['uploadError'] = "@Messages.get("uploadError")";
             <table class="table">
                 <thead>
                     <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                         <th></th>
                         @subjectPresent() {
                             <th></th>

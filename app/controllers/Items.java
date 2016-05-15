@@ -61,6 +61,8 @@ public class Items extends Controller {
                     .include("name")
                     .include("storageKey")
                     .include("tags.name")
+                    .include("uploadDate")
+                    .include("fileSize")
                     .exclude("*")
                     .serialize(items);
             return ok(serialized);
