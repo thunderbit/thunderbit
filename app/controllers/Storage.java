@@ -37,11 +37,11 @@ public class Storage extends Controller {
                         // Get the list of Tag entities for the new Item
                         List<Tag> tagsList = new ArrayList<>();
                         for (String tagName : tags) {
-                            Tag tag = Tag.find.where().eq("name", tagName).findUnique();
+                            Tag tag = Tag.find.where().eq("name", tagName.toLowerCase()).findUnique();
                             // Create new tags if they doesn't already exist
                             if (tag == null) {
                                 tag = new Tag();
-                                tag.name = tagName;
+                                tag.name = tagName.toLowerCase();
                                 tag.save();
                             }
                             tagsList.add(tag);
