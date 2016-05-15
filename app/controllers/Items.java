@@ -50,9 +50,9 @@ public class Items extends Controller {
                 }
             }
 
-            items = Item.find.where().in("tags", tags).findList();
+            items = Item.find.where().in("tags", tags).orderBy().desc("uploadDate").findList();
         } else {
-            items = Item.find.all();
+            items = Item.find.orderBy().desc("uploadDate").findList();
         }
 
         if (items != null) {
