@@ -69,10 +69,7 @@ messages['uploadError'] = "@Messages.get("uploadError")";
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></span>
-                    <input type="text" class="form-control input-lg tags-input" placeholder="@Messages.get("searchBoxText")">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-lg add-tag-btn" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                    </span>
+                    <input type="text" class="form-control input-lg tags-input typeahead" placeholder="@Messages.get("searchBoxText")" autocomplete="off" spellcheck="false">
                 </div>
             </div>
             <ul class="list-unstyled list-inline tags-container"></ul>

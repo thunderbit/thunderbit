@@ -14,7 +14,7 @@ function updateUploadProgressBarValue (percent) {
 }
 
 function addTagFromSearchBoxTagsInput () {
-    var tagsInput = $('.search-box .tags-input');
+    var tagsInput = $('.search-box .tags-input.typeahead.tt-input');
     if (tagsInput.val() != null && tagsInput.val() != "" && app.searchTags.findWhere({name: tagsInput.val()}) == null) {
         app.searchTags.add({name: tagsInput.val()});
         tagsInput.val('');
@@ -51,7 +51,7 @@ $(document).ready(function(){
         }
     });
 
-    $('.upload-file-modal .tags-input').typeahead({
+    $('.typeahead').typeahead({
         highlight: true
     },
     {
@@ -64,16 +64,11 @@ $(document).ready(function(){
         addTagFromUploadBoxTagsInput ();
     });
 
+    $('.search-box .tags-input').bind('typeahead:select', addTagFromSearchBoxTagsInput);
+
     $('.upload-file-modal .add-tag-btn').click(function(){
         addTagFromUploadBoxTagsInput ();
     });
-
-    $('.search-box .add-tag-btn').click(addTagFromSearchBoxTagsInput);
-    $('.search-box .tags-input').keyup(function(event) {
-        if (event.which == 13) {
-            addTagFromSearchBoxTagsInput();
-        }
-    }).focus();
 
     $('.upload-file-modal').on('hidden.bs.modal', function (e) {
         resetUploadModal();
