@@ -60,19 +60,13 @@ $(document).ready(function(){
         source: tags
     });
 
-    $('.upload-file-modal .tags-input').bind('typeahead:select', function(ev, suggestion) {
-        addTagFromUploadBoxTagsInput ();
-    });
+    $('.upload-file-modal .tags-input').bind('typeahead:select', addTagFromUploadBoxTagsInput);
 
     $('.search-box .tags-input').bind('typeahead:select', addTagFromSearchBoxTagsInput);
 
-    $('.upload-file-modal .add-tag-btn').click(function(){
-        addTagFromUploadBoxTagsInput ();
-    });
+    $('.upload-file-modal .add-tag-btn').click(addTagFromUploadBoxTagsInput);
 
-    $('.upload-file-modal').on('hidden.bs.modal', function (e) {
-        resetUploadModal();
-    });
+    $('.upload-file-modal').on('hidden.bs.modal', resetUploadModal);
 
     $('.upload-form').submit(function( event ) {
         event.preventDefault();
