@@ -1,16 +1,15 @@
 package controllers;
 
 import be.objectify.deadbolt.java.actions.SubjectPresent;
+import com.avaje.ebean.Query;
 import com.google.inject.Inject;
 import flexjson.JSONSerializer;
 import models.Item;
-import models.Tag;
 import play.data.Form;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,15 +41,15 @@ public class Items extends Controller {
         List<Item> items;
         if (jointTagNames != null && !jointTagNames.isEmpty()) {
             List<String> tagNames = Arrays.asList(jointTagNames.split(","));
-            List<Tag> tags = new ArrayList<>();
-            for (String tagName : tagNames) {
-                Tag tag = Tag.find.where().eq("name", tagName).findUnique();
-                if (tag != null) {
-                    tags.add(tag);
-                }
-            }
 
-            items = Item.find.where().in("tags", tags).orderBy().desc("uploadDate").findList();
+            String oql = "find item " +
+                    "where tags.name in (:tagList) " +
+                    "group by id " +
+                    "having count(distinct tags.name) = :tagCount";
+            Query<Item> query = Item.find.setQuery(oql);
+            query.setParameter("tagList", tagNames);
+            query.setParameter("tagCount", tagNames.size());
+            items = query.orderBy().desc("uploadDate").findList();
         } else {
             items = Item.find.orderBy().desc("uploadDate").findList();
         }
