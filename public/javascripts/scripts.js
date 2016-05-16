@@ -2,6 +2,7 @@
 function resetUploadModal () {
     $('.upload-file-modal .upload-btn').button('reset');
     $('.upload-file-modal .cancel-btn').show();
+    $('.upload-file-modal .tags-input').val('');
     $('.upload-progress').hide();
     updateUploadProgressBarValue(0);
     app.uploadTags.reset();
