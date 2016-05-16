@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static play.test.Helpers.running;
 
-public class StorageModuleTest extends WithApplication {
+public class StorageModuleTest {
     @Test
     public void testLocalFilesystemStorageMapping () {
         Application application = new GuiceApplicationBuilder()
