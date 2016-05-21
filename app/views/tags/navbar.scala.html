@@ -13,6 +13,9 @@
             <a class="navbar-brand" href="@routes.Application.index()">Thunderbit</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#" role="button" data-toggle="modal" data-target=".about-modal"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> @Messages.get("about")</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 @subjectPresent() {
                     <li><a href="#" role="button" data-toggle="modal" data-target=".upload-file-modal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> @Messages.get("uploadFile")</a></li>
