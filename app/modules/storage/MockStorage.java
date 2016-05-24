@@ -3,6 +3,7 @@ package modules.storage;
 import com.google.inject.Inject;
 import play.Configuration;
 import play.Logger;
+import play.Play;
 import play.libs.F;
 import play.mvc.Result;
 
@@ -19,7 +20,7 @@ public class MockStorage implements Storage {
 
     @Inject
     public MockStorage(Configuration configuration) {
-        mockFilePath = Paths.get(configuration.getString("storage.mock.mockFilePath", "mockStorage/mockFile"));
+        mockFilePath = Paths.get(configuration.getString("storage.mock.mockFilePath", Play.application().getFile("mockStorage/mockFile").getAbsolutePath()));
         if (!Files.exists(mockFilePath)) logger.error("Mock file does not exist");
     }
 
