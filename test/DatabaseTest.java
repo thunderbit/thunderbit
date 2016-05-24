@@ -24,7 +24,7 @@ public class DatabaseTest {
     public static void prepareConfigOverrides() {
         configOverrides = new HashMap<>();
         configOverrides.put("db.default.driver", "org.postgresql.Driver");
-        configOverrides.put("db.default.url", "jdbc:postgresql://localhost/test");
+        configOverrides.put("db.default.url", "jdbc:postgresql://localhost/thunderbit");
         configOverrides.put("db.default.username", "postgres");
         configOverrides.put("db.default.password", "");
     }
@@ -34,7 +34,7 @@ public class DatabaseTest {
         database = Databases.createFrom(
                 "default",
                 "org.postgresql.Driver",
-                "jdbc:postgresql://localhost/test",
+                "jdbc:postgresql://localhost/thunderbit",
                 ImmutableMap.of(
                         "username", "postgres",
                         "password", ""
