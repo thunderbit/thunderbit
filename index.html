@@ -82,7 +82,7 @@ layout: basic
 		<article>
 			<div class="row">
 				{% for post in site.posts limit:2 %}
-					<div class="col-xs-6">
+					<div class="col-md-6">
 						<header id="header" class="">
 							<h3><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h3>
 							<p><i class="fa fa-calendar"></i> {{ post.date | date_to_string}}</p>
