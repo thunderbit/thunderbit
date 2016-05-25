@@ -60,12 +60,6 @@ header .container {
 	margin-top: 0px;
 }
 
-@media (max-width:768px) {
-	body > header h1 {
-		font-size: 42px;
-	}
-}
-
 #blog_header .container {
     margin-top: 0px;
 }
@@ -190,7 +184,11 @@ footer .lead hidden-xs {
 }
 
 @media (min-width: 768px) {
-  .feature-heading {
-    font-size: 50px;
-  }
+	body > header h1 {
+		font-size: 42px;
+	}
+
+	.feature-heading {
+		font-size: 50px;
+	}
 }
