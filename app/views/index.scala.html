@@ -107,6 +107,23 @@ messages['uploadError'] = "@Messages.get("uploadError")";
     </div>
 </div>
 
+<div class="modal fade about-modal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="@Messages.get("close")"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="aboutModalLabel">@Messages.get("aboutThunderbit")</h4>
+            </div>
+            <div class="modal-body text-center">
+                <p>@Messages.get("moreAboutThunderbit")</p>
+                <p><a href="http://thunderbit.github.io/thunderbit">@Messages.get("visitWebsite")</a> | <a href="http://github.com/thunderbit/thunderbit">@Messages.get("visitProjectOnGithub")</a></p>
+                <p>Copyright © 2016 Thunderbit Team </p>
+                <p>@Messages.get("copyrightStatement")</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 @subjectPresent() {
 <div class="modal fade upload-file-modal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel">
     <div class="modal-dialog modal-lg">
