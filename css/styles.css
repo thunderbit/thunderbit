@@ -9,14 +9,8 @@ body {
 }
 
 #competition-banner {
-	padding-top: 1px;
-	height: 25px;
-	width: 100%;
+	padding-top: 15px;
 	background-color: #333;
-	position:fixed;
-	top:0px;
-	left: 0px;
-	z-index: 1000;
 	border-bottom: 1px solid #100f14;
 }
 
