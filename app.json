@@ -4,8 +4,8 @@
   "keywords": ["digital assets manager", "web application", "Java", "AGPL", "Play! Framework", "cloud", "S3", "multiplatform"],
   "website": "http://thunderbit.github.io/thunderbit",
   "repository": "https://github.com/thunderbit/thunderbit",
-  "logo": "http://thunderbit.github.io/thunderbit/images/logo-wb.png"
-  "success_url": "/"
+  "logo": "http://thunderbit.github.io/thunderbit/images/logo-wb.png",
+  "success_url": "/",
   "scripts": {
   },
   "env": {

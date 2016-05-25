@@ -1,6 +1,8 @@
+import NativePackagerHelper._
+
 name := """Thunderbit"""
 
-version := "1.0-SNAPSHOT"
+version := "0.1"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
 
@@ -29,3 +31,10 @@ libraryDependencies += "junit" % "junit" % "4.11" % Test
 // Play provides two styles of routers, one expects its actions to be injected, the
 // other, legacy style, accesses its actions statically.
 routesGenerator := InjectedRoutesGenerator
+
+//********************
+// Universal packaging
+//********************
+
+mappings in Universal ++= directory("mockStorage")
+
