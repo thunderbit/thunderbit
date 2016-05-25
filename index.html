@@ -4,39 +4,69 @@ layout: basic
 {% include header.html %}
 <section id="features-container">
 	<div class="container">
-		<div class="row text-center">
-			<header>
-				<h2>Main features</h2>
-			</header><!-- /header -->
-			<div class="col-md-4">
-				<i class="fa fa-tags fa-5x"></i>
-				<h3>Tags</h3>
-				<p class="lead">Thunderbit uses tags to organize digital assets, a well known and widely used method.</p>
+		<div class="row feature">
+			<div class="col-md-7">
+				<h2 class="feature-heading">Just tags</h2>
+				<p class="lead">Thunderbit helps you manage big collections of related files through tags</p>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-5">
+				<img class="feature-image img-responsive center-block" src="{{ site.baseurl }}/images/files-and-tags.png">
+			</div>
+		</div>
+		<hr class="feature-divider"/>
+		<div class="row feature">
+			<div class="col-md-7 col-md-push-5">
+				<h2 class="feature-heading">What are you lookin for?</h2>
+				<p class="lead">Don't need to know the exact name or path, just some tags which describes it</p>
+			</div>
+			<div class="col-md-5 col-md-pull-7">
+				<img class="feature-image img-responsive center-block" src="{{ site.baseurl }}/images/filter-by-tags.png">
+			</div>
+		</div>
+		<hr class="feature-divider"/>
+		<div class="row feature">
+			<div class="col-md-7">
+				<h2 class="feature-heading">Guess what...</h2>
+				<p class="lead">Let Thunderbit speed up your search by guessing next tags based on the ones you already entered</p>
+			</div>
+			<div class="col-md-5">
+				<img class="feature-image img-responsive center-block" src="{{ site.baseurl }}/images/tags-recommendation.png">
+			</div>
+		</div>
+		<hr class="feature-divider"/>
+		<div class="row text-center">
+			<div class="col-md-6">
 				<i class="fa fa-linux fa-5x"></i> <i class="fa fa-windows fa-5x"></i> <i class="fa fa-apple fa-5x"></i>
 				<h3>Multiplatform</h3>
 				<p class="lead">Thunderbit runs on multiple paltforms, like GNU/Linux, Windows and Mac</p>
 			</div>
-			<div class="col-md-4">
-				<i class="fa fa-unlock fa-5x"></i>
-				<h3>Free Open Source Software</h3>
-				<p class="lead">Thunderbit's source code is released under the free <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License</a></p>
-			</div>
-			<div class="col-md-4">
+			<hr class="feature-divider hidden-md hidden-lg"/>
+			<div class="col-md-6">
 				<i class="fa fa-cloud-upload fa-5x"></i>
 				<h3>Cloud ready</h3>
 				<p class="lead">Thunderbit can store uploaded files in a <a href="http://docs.aws.amazon.com/AmazonS3">S3</a> bucket as well as in the local filesystem</p>
 			</div>
-			<div class="col-md-4">
+		</div>
+		<hr class="feature-divider"/>
+		<div class="row text-center">
+			<div class="col-md-6">
 				<i class="fa fa-tablet fa-5x"></i> <i class="fa fa-laptop fa-5x"></i> <i class="fa fa-television fa-5x"></i>
 				<h3>Responsive</h3>
 				<p class="lead">Thunderbit's UI adapts to different screens resolutions, from small mobiles to large desktops</p>
 			</div>
-			<div class="col-md-4">
+			<hr class="feature-divider hidden-md hidden-lg"/>
+			<div class="col-md-6">
 				<i class="fa fa-language fa-5x"></i>
 				<h3>Localized</h3>
 				<p class="lead">Thunderbit supports Spanish and English languages</p>
+			</div>
+		</div>
+		<hr class="feature-divider"/>
+		<div class="row text-center">
+			<div class="col-xs-12">
+				<i class="fa fa-unlock fa-5x"></i>
+				<h3>Free Open Source Software</h3>
+				<p class="lead">Thunderbit's source code is released under the free <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License</a></p>
 			</div>
 		</div>
 	</div>

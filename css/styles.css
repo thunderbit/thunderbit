@@ -118,12 +118,19 @@ header .container {
 
 #features-container {
 	background-color: #E5ECF2;
-	padding-top: 30px;
-	padding-bottom: 25px;
+	padding: 80px 0 80px;
 }
 
-#features-container header {
-	margin-bottom: 35px;
+.feature-heading {
+    font-size: 50px;
+}
+
+.feature-divider {
+    margin: 80px 0;
+}
+
+hr {
+    border-top: 1px solid #DDDDDD;
 }
 
 .under-development-banner {
@@ -180,4 +187,10 @@ footer a i:hover {
 
 footer .lead hidden-xs {
 	color: #fff;
+}
+
+@media (min-width: 768px) {
+  .feature-heading {
+    font-size: 50px;
+  }
 }
