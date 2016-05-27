@@ -37,13 +37,13 @@ public class Tag extends Model {
     @ManyToMany(cascade = CascadeType.ALL)
     public List<Item> items;
 
-    public Tag () {
-        items = new ArrayList<>();
-    }
-
     public static Finder<Long,Tag> find = new Finder<Long,Tag>(
             "default", Tag.class
     );
+
+    public Tag () {
+        items = new ArrayList<>();
+    }
 
     public List<Item> getItems() {
         return items;

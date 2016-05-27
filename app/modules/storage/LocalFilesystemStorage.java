@@ -40,8 +40,8 @@ public class LocalFilesystemStorage implements Storage {
     public LocalFilesystemStorage (Configuration configuration) {
         storagePath = Paths.get(configuration.getString("storage.local.path", "storage"));
 
-        if (configuration.getBoolean("storage.local.createPath", true)) {
-            if (!Files.exists(storagePath)) try {
+        if (configuration.getBoolean("storage.local.createPath", true) && !Files.exists(storagePath)) {
+            try {
                 Files.createDirectories(storagePath);
             } catch (IOException e) {
                 logger.error("Could not create storage directory", e);

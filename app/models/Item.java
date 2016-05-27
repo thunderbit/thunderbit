@@ -44,13 +44,13 @@ public class Item extends Model {
     @ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
     public List<Tag> tags;
 
-    public Item () {
-        tags = new ArrayList<>();
-    }
-
     public static Finder<Long,Item> find = new Finder<Long,Item>(
             "default", Item.class
     );
+
+    public Item () {
+        tags = new ArrayList<>();
+    }
 
     public List<Tag> getTags() {
         return tags;
