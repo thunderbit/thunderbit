@@ -19,6 +19,8 @@ package modules.neo4j.controller;
 
 import org.neo4j.ogm.exception.NotFoundException;
 
+import java.util.Collection;
+
 public abstract class GenericController<T> implements Controller<T> {
     /**
      * {@inheritDoc}
@@ -51,7 +53,7 @@ public abstract class GenericController<T> implements Controller<T> {
     /**
      * {@inheritDoc}
      */
-    public Iterable<T> list() {
+    public Collection<T> list() {
         return getService().findAll();
     }
 

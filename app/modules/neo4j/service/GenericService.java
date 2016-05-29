@@ -21,6 +21,8 @@ import com.google.inject.Inject;
 import modules.neo4j.domain.Entity;
 import modules.neo4j.session.Neo4JSessionProvider;
 
+import java.util.Collection;
+
 public abstract class GenericService<T> implements Service<T> {
     private static final int DEPTH_LIST = 0;
     private static final int DEPTH_ENTITY = 1;
@@ -31,7 +33,7 @@ public abstract class GenericService<T> implements Service<T> {
     /**
      * {@inheritDoc}
      */
-    public Iterable<T> findAll() {
+    public Collection<T> findAll() {
         return sessionProvider.getSession().loadAll(
                 getEntityType(), DEPTH_LIST);
     }

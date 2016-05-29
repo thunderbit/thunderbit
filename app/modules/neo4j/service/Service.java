@@ -17,8 +17,10 @@
 
 package modules.neo4j.service;
 
+import java.util.Collection;
+
 public interface Service<T> {
-    Iterable<T> findAll();
+    Collection<T> findAll();
 
     T find(Long id);
 

@@ -19,6 +19,8 @@ package modules.neo4j.controller;
 
 import modules.neo4j.service.Service;
 
+import java.util.Collection;
+
 public interface Controller<T> {
     Service<T> getService();
 
@@ -28,7 +30,7 @@ public interface Controller<T> {
 
     void delete(Long id);
 
-    Iterable<T> list();
+    Collection<T> list();
 
     T find(Long id);
 }
