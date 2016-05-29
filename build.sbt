@@ -23,7 +23,10 @@ libraryDependencies ++= Seq(
   "org.webjars" % "underscorejs" % "1.8.3",
   "org.webjars" % "typeaheadjs" % "0.11.1",
   "net.sf.flexjson" % "flexjson" % "3.3",
-  "be.objectify" %% "deadbolt-java" % "2.4.4"
+  "be.objectify" %% "deadbolt-java" % "2.4.4",
+  "org.neo4j" % "neo4j-ogm" % "1.1.6",
+  "com.fasterxml.jackson.core" % "jackson-annotations" % "2.6.4",
+  "org.slf4j" % "slf4j-jdk14" % "1.7.5"
 )
 
 libraryDependencies += "junit" % "junit" % "4.11" % Test

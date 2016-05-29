@@ -8,6 +8,7 @@ scala:
 
 services:
   - postgresql
+  - neo4j
 
 before_script:
   - psql -c 'create database thunderbit;' -U postgres
