@@ -17,16 +17,12 @@
 
 package modules.neo4j.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.neo4j.ogm.annotation.EndNode;
 import org.neo4j.ogm.annotation.RelationshipEntity;
 import org.neo4j.ogm.annotation.StartNode;
 
 @RelationshipEntity(type = "RELATED_TO")
-public class Relation {
-    @JsonProperty("id")
-    private Long id;
-    
+public class Relation extends Entity {
     @StartNode
     private Tag sTag;
     
