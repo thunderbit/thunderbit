@@ -148,18 +148,6 @@ header .container {
     background-color: white;
 }
 
-.feature-heading {
-    font-size: 50px;
-}
-
-.feature-divider {
-    margin: 80px 0;
-}
-
-hr {
-    border-top: 1px solid #DDDDDD;
-}
-
 .under-development-banner {
     background-color: #444;
     color: #FFF;
