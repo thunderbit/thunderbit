@@ -165,6 +165,27 @@ header .container {
     background-color: white;
 }
 
+.release-download-banner {
+    background-color: #1a1f33;
+    color: #FFF;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    border-top: 1px solid #1a1f33;
+    border-bottom: 1px solid #1a1f33;
+    height: 175px;
+}
+
+.release-download-banner .btn:hover,
+.release-download-banner.btn:focus,
+.release-download-banner .btn:active {
+    color: darkred;
+    background-color: white;
+    border-color: darkred;
+    -webkit-transition: all 0.15s;
+    -moz-transition: all 0.15s;
+    transition: all 0.15s;
+}
+
 .under-development-banner {
     background-color: #363f64;
     color: #FFF;
@@ -174,9 +195,9 @@ header .container {
     border-bottom: 1px solid #1a1f33;
 }
 
-.btn:hover,
-.btn:focus,
-.btn:active {
+.under-development-banner .btn:hover,
+.under-development-banner .btn:focus,
+.under-development-banner .btn:active {
     color: green;
     background-color: white;
     border-color: green;
