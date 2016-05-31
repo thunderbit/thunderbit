@@ -58,10 +58,6 @@ header #logo {
     background: url("../images/logo-wb.png") center no-repeat;
 }
 
-body > header h1 {
-    font-size: 72px;
-}
-
 header h1 a, header h1 a:hover, header h1 a:focus, header h2 a, header h2 a:hover, header h2 a:focus {
     color: #FFFFFF;
     text-decoration: none;
