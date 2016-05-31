@@ -149,10 +149,12 @@ header .container {
 }
 
 .under-development-banner {
-    background-color: #444;
+    background-color: #363f64;
     color: #FFF;
     padding-top: 20px;
     padding-bottom: 20px;
+    border-top: 1px solid #1a1f33;
+    border-bottom: 1px solid #1a1f33;
 }
 
 .btn:hover,
