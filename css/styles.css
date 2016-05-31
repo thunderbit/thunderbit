@@ -153,16 +153,12 @@ header .container {
 }
 
 #features-container {
-    background-color: #E5ECF2;
+    background-color: whitesmoke;
 }
 
 .feature {
     padding: 80px 0px 80px 0px;
     border-bottom: 1px solid #DDDDDD;
-}
-
-.feature:nth-of-type(even) {
-    background-color: white;
 }
 
 .release-download-banner {
