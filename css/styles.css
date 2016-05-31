@@ -159,6 +159,7 @@ header .container {
 .feature {
     padding: 80px 0px 80px 0px;
     border-bottom: 1px solid #DDDDDD;
+    height: 396px;
 }
 
 .release-download-banner {
