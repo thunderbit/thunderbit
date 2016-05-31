@@ -175,9 +175,9 @@ header .container {
 .release-download-banner .btn:hover,
 .release-download-banner.btn:focus,
 .release-download-banner .btn:active {
-    color: darkred;
+    color: darkblue;
     background-color: white;
-    border-color: darkred;
+    border-color: lightblue;
     -webkit-transition: all 0.15s;
     -moz-transition: all 0.15s;
     transition: all 0.15s;
