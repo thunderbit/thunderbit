@@ -37,6 +37,13 @@ body > header {
     text-align: center;
 }
 
+#tb-head {
+    height: 112px;
+    margin-bottom: 97.2px;
+    text-shadow: 0 0 15px black;
+    text-align: center;
+}
+
 header #logo {
     width: inherit;
     height: 173px;
