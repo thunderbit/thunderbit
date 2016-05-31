@@ -34,7 +34,7 @@ We uploaded [a `.zip` file to GitHub](https://github.com/thunderbit/thunderbit/r
 
 Now the application should be available at [http://localhost:9000](http://localhost:9000). Login with the username and password you set before. To stop it enter `Ctl + C` or just close the terminal.
 
-If you stuck somewhere in the installation process open a thread on [the mail list](mailto:thunderbit-dev@googlegroups.com). If you find a bug [fill an issue on Taiga](). If you like what you see [let us know](http://twitter.com/thunderbitdev).
+If you stuck somewhere in the installation process open a thread on [the mail list](mailto:thunderbit-dev@googlegroups.com). If you find a bug [fill an issue on Taiga](https://tree.taiga.io/project/thunderbit/issues). If you like what you see [let us know](http://twitter.com/thunderbitdev).
 
 ## How to run it on the cloud (Heroku)
 
