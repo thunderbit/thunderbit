@@ -44,6 +44,14 @@ body > header {
     text-align: center;
 }
 
+#tb-head h1 {
+    font-size: 625%;
+}
+#tb-head h2 {
+    font-size: 195%;
+    text-align: center;
+}
+
 header #logo {
     width: inherit;
     height: 173px;
