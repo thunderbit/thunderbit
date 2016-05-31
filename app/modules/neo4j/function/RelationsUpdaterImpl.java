@@ -63,8 +63,20 @@ public class RelationsUpdaterImpl implements RelationsUpdater {
                     tagController.create(nTagTo);
                 }
 
-                // Update weight of relation between tags
-                nTagFrom.addRelation(new Relation().setNewRelation(nTagFrom, nTagTo, row.getInteger("weight")));
+                List<Relation> relations = nTagFrom.getTags();
+                boolean createNew = true;
+                for (Relation relation : relations) {
+                    if (relation.geteTag().equals(nTagTo)) {
+                        relation.setWeight(row.getInteger("weight"));
+                        createNew = false;
+                        break;
+                    }
+                }
+
+                if (createNew == true) {
+                    nTagFrom.addRelation(new Relation().setNewRelation(nTagFrom, nTagTo, row.getInteger("weight")));
+                }
+                
                 tagController.update(nTagFrom, nTagFrom.getId());
             }
         }
