@@ -22,6 +22,7 @@ import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.google.inject.Inject;
 import models.Item;
 import models.Tag;
+import modules.neo4j.function.RelationsUpdater;
 import play.libs.F;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -33,6 +34,9 @@ import java.util.*;
 public class Storage extends Controller {
     @Inject
     public modules.storage.Storage storage;
+
+    @Inject
+    public RelationsUpdater relationsUpdater;
 
     private final String[] EMPTY_ARRAY = {};
 
@@ -72,6 +76,8 @@ public class Storage extends Controller {
                         item.fileSize = fileSize;
                         item.setTags(tagsList);
                         item.save();
+
+                        relationsUpdater.update(tagsList);
 
                         return ok();
                     });
