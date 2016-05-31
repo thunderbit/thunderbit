@@ -99,22 +99,40 @@ header .container {
 }
 
 .social-buttons {
-    padding-top: 20px;
+    text-align: center;
+}
+
+.social-buttons li:nth-child(2) {
+    margin-right: 281px;
+}
+
+.social-buttons li a {
+    width: 90px;
+    height: 90px;
+    padding: 15px 0 0 1px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+}
+
+.social-buttons li a i {
+    text-align: center;
+    vertical-align: middle;
+
 }
 
 .social-buttons a {
-    border-bottom: 2px solid rgba(255,255,255,0);
     color: #FFFFFF;
-    margin: 0px 20px;
-    padding-bottom: 10px;
-    transition:all .1s ease-in-out;
+
 }
 
-.social-buttons a:hover {
-    border-bottom: 2px solid rgba(255,255,255,0.9);
-    margin: 0px;
-    padding: 0px 20px 10px 20px;
-    transition:all .1s ease-in-out;
+.social-buttons li a:hover {
+    color: #131732;
+    background-color: #fff;
+    transition: color 0.2s;
+    transition: background-color 0.2s;
 }
 
 #features-container {
