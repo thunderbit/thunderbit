@@ -1,57 +1,57 @@
 
 @font-face {
-		font-family: OpenSans-Regular;
-		src: url(../fonts/OpenSans-Regular.ttf);
+    font-family: OpenSans-Regular;
+    src: url(../fonts/OpenSans-Regular.ttf);
 }
 
 body {
-	font-family: OpenSans-Regular !important;
+    font-family: OpenSans-Regular !important;
 }
 
 #competition-banner {
-	padding-top: 15px;
-	background-color: #333;
-	border-bottom: 1px solid #100f14;
+    padding-top: 15px;
+    background-color: #333;
+    border-bottom: 1px solid #100f14;
 }
 
 #competition-banner > p {
-	font-size: 15px;
-	font-weight: bold;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 #competition-banner p, #competition-banner a {
-	color: #9a848c;
+    color: #9a848c;
 }
 #competition-banner a:hover {
-	color: #e7dfec;
-	text-decoration: none;
+    color: #e7dfec;
+    text-decoration: none;
 }
 
 body > header {
-	background: #ffffff url("../images/top_back.jpg") top center fixed no-repeat;
-	background-color: rgba(0,0,0,0.4);
-	color: #FFFFFF;
-	padding: 35px;
-	height:575px;
+    background: #ffffff url("../images/top_back.jpg") top center fixed no-repeat;
+    background-color: rgba(0,0,0,0.4);
+    color: #FFFFFF;
+    padding: 35px;
+    height:575px;
 }
 
 header #logo {
-	width: inherit;
-	height: 173px;
-	background: url("../images/logo-wb.png") center no-repeat;
+    width: inherit;
+    height: 173px;
+    background: url("../images/logo-wb.png") center no-repeat;
 }
 
 body > header h1 {
-	font-size: 72px;
+    font-size: 72px;
 }
 
 header h1 a, header h1 a:hover, header h1 a:focus, header h2 a, header h2 a:hover, header h2 a:focus {
-	color: #FFFFFF;
-	text-decoration: none;
+    color: #FFFFFF;
+    text-decoration: none;
 }
 
 header .container {
-	margin-top: 0px;
+    margin-top: 0px;
 }
 
 #blog_header .container {
@@ -72,8 +72,8 @@ header .container {
 }
 
 #blog_header #logo_holder {
-	background: url("../images/logo-wb.png") left top 15px / 42px 75px no-repeat;
-	padding-left: 53px;
+    background: url("../images/logo-wb.png") left top 15px / 42px 75px no-repeat;
+    padding-left: 53px;
 }
 
 .center-image-markdown {
@@ -82,31 +82,31 @@ header .container {
 }
 
 .post-content {
-	text-align: justify;
+    text-align: justify;
 }
 
 .social-buttons {
-	padding-top: 20px;
+    padding-top: 20px;
 }
 
 .social-buttons a {
-	border-bottom: 2px solid rgba(255,255,255,0);
-	color: #FFFFFF;
-	margin: 0px 20px;
-	padding-bottom: 10px;
-	transition:all .1s ease-in-out;
+    border-bottom: 2px solid rgba(255,255,255,0);
+    color: #FFFFFF;
+    margin: 0px 20px;
+    padding-bottom: 10px;
+    transition:all .1s ease-in-out;
 }
 
 .social-buttons a:hover {
-	border-bottom: 2px solid rgba(255,255,255,0.9);
-	margin: 0px;
-	padding: 0px 20px 10px 20px;
-	transition:all .1s ease-in-out;
+    border-bottom: 2px solid rgba(255,255,255,0.9);
+    margin: 0px;
+    padding: 0px 20px 10px 20px;
+    transition:all .1s ease-in-out;
 }
 
 #features-container {
-	background-color: #E5ECF2;
-	padding: 80px 0 80px;
+    background-color: #E5ECF2;
+    padding: 80px 0 80px;
 }
 
 .feature-heading {
@@ -122,67 +122,67 @@ hr {
 }
 
 .under-development-banner {
-	background-color: #444;
-	color: #FFF;
-	padding-top: 20px;
-	padding-bottom: 20px;
+    background-color: #444;
+    color: #FFF;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .btn:hover,
 .btn:focus,
 .btn:active {
-  color: green;
-  background-color: white;
-  border-color: green;
-  -webkit-transition: all 0.15s;
-     -moz-transition: all 0.15s;
-          transition: all 0.15s;
+    color: green;
+    background-color: white;
+    border-color: green;
+    -webkit-transition: all 0.15s;
+    -moz-transition: all 0.15s;
+    transition: all 0.15s;
 }
 
 #posts-container {
-	padding: 15px 0px 30px 0px;
-	background-color: #ffffff;
+    padding: 15px 0px 30px 0px;
+    background-color: #ffffff;
 }
 
 .post-excerpt {
-	text-align: justify;
+    text-align: justify;
 }
 
 footer {
-	color: #fff;
-	background-color: #333;
-	padding: 15px 0px 15px 0px;
-	font-size:1em;
+    color: #fff;
+    background-color: #333;
+    padding: 15px 0px 15px 0px;
+    font-size:1em;
 }
 
 footer a {
-	color: #fff;
+    color: #fff;
 }
 
 footer a:hover {
-	color: #fff;
-	text-decoration: none;
-	color: red;
+    color: #fff;
+    text-decoration: none;
+    color: red;
 }
 
 footer a i {
-	color: red;
+    color: red;
 }
 
 footer a i:hover {
-	color: #fff;
+    color: #fff;
 }
 
 footer .lead hidden-xs {
-	color: #fff;
+    color: #fff;
 }
 
 @media (min-width: 768px) {
-	body > header h1 {
-		font-size: 42px;
-	}
+    body > header h1 {
+        font-size: 42px;
+    }
 
-	.feature-heading {
-		font-size: 50px;
-	}
+    .feature-heading {
+        font-size: 50px;
+    }
 }
