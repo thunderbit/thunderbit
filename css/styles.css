@@ -28,11 +28,13 @@ body {
 }
 
 body > header {
-    background: #ffffff url("../images/top_back.jpg") top center fixed no-repeat;
+    background: #ffffff url("../images/back-header.jpg") top center no-repeat;
     background-color: rgba(0,0,0,0.4);
     color: #FFFFFF;
     padding: 35px;
-    height:575px;
+    height:429px;
+    border-bottom: 2px solid silver;
+    text-align: center;
 }
 
 header #logo {
