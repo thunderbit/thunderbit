@@ -46,6 +46,6 @@ Creating the tags recomender have been harder than we thought. It should come ou
 
 ## Aknowledgements
 
-It has been a six months journey since we started working on Thunderbit to this first release, and we have enjoyed almost everything about it, but there is one thing we have enjoyed the most: comunity. There is nothing like discovering someone has [starred you project](https://github.com/thunderbit/thunderbit/stargazers), filled an issue, or in any other way shown she cares about it. That feeling is just priceless. Thank you a lot for being there with us.
+It has been a six months journey since we started working on Thunderbit to this first release, and we have enjoyed almost everything about it, but there is one thing we have enjoyed the most: community. There is nothing like discovering someone has [starred your project](https://github.com/thunderbit/thunderbit/stargazers), filled an issue, or in any other way shown she cares about it. That feeling is just priceless. Thank you a lot for being there with us.
 
 A BIG THANKS to the [Free Software Office of the University of Granada](http://osl.ugr.es) for creating [the competition](http://osl.ugr.es/2015/10/01/certamen-de-proyectos-libres-de-la-universidad-de-granada-2015-2016/), and to the [Taiga](http://taiga.io) team for your support and for being a source of inspiration as a free software project.
