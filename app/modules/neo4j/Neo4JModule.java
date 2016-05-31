@@ -20,10 +20,7 @@ package modules.neo4j;
 import com.google.inject.AbstractModule;
 import modules.neo4j.controller.TagController;
 import modules.neo4j.controller.TagControllerImpl;
-import modules.neo4j.function.Matcher;
-import modules.neo4j.function.MatcherImpl;
-import modules.neo4j.function.Recommender;
-import modules.neo4j.function.RecommenderImpl;
+import modules.neo4j.function.*;
 import modules.neo4j.service.TagService;
 import modules.neo4j.service.TagServiceImpl;
 import modules.neo4j.session.Neo4JSessionProvider;
@@ -37,5 +34,6 @@ public class Neo4JModule  extends AbstractModule {
         bind(TagController.class).to(TagControllerImpl.class);
         bind(Recommender.class).to(RecommenderImpl.class);
         bind(Matcher.class).to(MatcherImpl.class);
+        bind(RelationsUpdater.class).to(RelationsUpdaterImpl.class);
     }
 }

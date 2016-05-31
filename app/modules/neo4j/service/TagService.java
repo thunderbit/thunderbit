@@ -20,5 +20,5 @@ package modules.neo4j.service;
 import modules.neo4j.domain.Tag;
 
 public interface TagService extends Service<Tag> {
-    
+    Tag findByTagId(Long tagId);
 }

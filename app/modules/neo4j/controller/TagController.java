@@ -20,5 +20,5 @@ package modules.neo4j.controller;
 import modules.neo4j.domain.Tag;
 
 public interface TagController extends Controller<Tag> {
-
+    Tag findByTagId(Long tagId);
 }

@@ -26,6 +26,13 @@ public class TagControllerImpl extends GenericController<Tag> implements TagCont
     @Inject
     public TagService tagService;
 
+    /**
+     * {@inheritDoc}
+     */
+    public Tag findByTagId(Long tagId) {
+        return tagService.findByTagId(tagId);
+    }
+
     @Override
     public Service<Tag> getService() {
         return tagService;

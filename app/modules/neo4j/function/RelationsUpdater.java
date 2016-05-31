@@ -15,23 +15,15 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package modules.neo4j.service;
+package modules.neo4j.function;
 
-import modules.neo4j.domain.Tag;
+import models.Tag;
 
-import java.util.Collections;
+import java.util.List;
 
-public class TagServiceImpl extends GenericService<Tag> implements TagService {
-    /**
-     * {@inheritDoc}
-     */
-    public Tag findByTagId(Long tagId) {
-        return sessionProvider.getSession()
-                .queryForObject(Tag.class, "MATCH (matched:Tag {tagId:" + tagId + "}) RETURN matched", Collections.emptyMap());
-    }
-
-    @Override
-    protected Class<Tag> getEntityType() {
-        return Tag.class;
-    }
+/**
+ * Created by greenled on 30/05/16.
+ */
+public interface RelationsUpdater {
+    void update (List<Tag> tags);
 }
